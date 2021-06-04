@@ -5,8 +5,8 @@ import {Register} from "./register";
 export const UnAuthRoutes = () => {
     return (
         <Routes>
-            <Route path={"/login/*"} element={<Login />} />
-            <Route path={"/register/*"} element={<Register />} />
+            <Route path={"/login"} element={<Login />} />
+            <Route path={"/register"} element={<Register />} />
             <Navigate to={"login"} />
         </Routes>
     );

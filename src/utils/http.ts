@@ -3,7 +3,6 @@ import { useCallback } from "react";
 import { message } from "antd";
 import {useAuth} from "../context/auth-context";
 import * as auth from "../auth-provider";
-import {localStorageKey} from "../auth-provider";
 
 const apiUrl = process.env.REACT_APP_API_URL;
 
@@ -50,6 +49,7 @@ export const http = async (
                 if(data.code === 202 || data.code === 303 || data.code === 304 || data.code === 305) {
                     // token出错
                     await auth.logout();
+                    message.error("请重新登录");
                     window.location.reload();
                     return Promise.reject({ message: "请重新登录" });
                 }

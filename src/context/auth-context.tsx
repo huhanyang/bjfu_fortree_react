@@ -6,7 +6,6 @@ import {useAsync} from "../utils/use-async";
 import * as auth from "../auth-provider";
 import {localStorageKey, LoginRequestParams, RegisterRequestParams} from "../auth-provider";
 import {useQueryClient} from "react-query";
-import {message} from "antd";
 
 const bootstrapUser = async () => {
     let user = null;

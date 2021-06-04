@@ -19,7 +19,7 @@ export const WoodlandCreate = () => {
     const handleSubmit = async (value: CreateWoodlandRequestParams) => {
         try {
             await createWoodland({...value}).then(() => {
-                navigate("/back/applyJob/list", { replace: true });
+                navigate("/back/apply-job/list-created", { replace: true });
             });
         } catch (e) {
             message.error(e.message);

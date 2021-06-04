@@ -1,15 +1,13 @@
 import {GetApplyJobsRequestParams, useApplyJobs} from "../../../../utils/apply-job";
 import {useState} from "react";
 import {
-    FilterConfirmProps,
     FilterValue,
     SorterResult,
     TableCurrentDataSource,
     TablePaginationConfig
 } from "antd/lib/table/interface";
 import {SingleFieldSorter} from "../../../../type/request";
-import {Button, Input, message, Space, Table} from "antd";
-import {SearchOutlined} from "@ant-design/icons";
+import {Button, Table} from "antd";
 import {
     ApplyJob,
     ApplyJobStates,

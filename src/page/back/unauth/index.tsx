@@ -1,12 +1,9 @@
 import styled from "@emotion/styled";
 import { Button, Card, Row, Col } from "antd";
 import {UnAuthRoutes} from "./unauth-routes";
-import {useDocumentTitle} from "../../../utils";
-import logo from "../../../assets/logo.svg";
 
 
 export const UnAuthenticatedApp = () => {
-    useDocumentTitle("请登录注册以继续");
 
     return (
         <Row>
@@ -19,7 +16,7 @@ export const UnAuthenticatedApp = () => {
                 xl={8}
                 style={{ paddingTop: "5vh", paddingBottom: "10vh" }}
             >
-                <Header />
+                <Header>树木数据库</Header>
                 <ShadowCard>
                     <UnAuthRoutes />
                 </ShadowCard>
@@ -39,10 +36,12 @@ export const CardTitle = styled.h2`
 `;
 
 const Header = styled.header`
-  background: url(${logo}) no-repeat center;
   padding: 5rem 0;
   background-size: 8rem;
   width: 100%;
+  text-align: center;
+  font-size: 30px;
+  font-weight: bold;
 `;
 
 const ShadowCard = styled(Card)`

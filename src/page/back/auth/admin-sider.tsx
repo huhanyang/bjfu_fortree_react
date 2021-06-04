@@ -56,8 +56,8 @@ export const AdminSider = ({
                     <Menu.Item key="6"><Link to="/back/woodland/create">创建林地</Link></Menu.Item>
                 </SubMenu>
                 <SubMenu key="sub3" icon={<NotificationOutlined />} title="申请">
-                    <Menu.Item key="6"><Link to="/back/apply-job/list">申请列表</Link></Menu.Item>
-                    <Menu.Item key="7"><Link to="/back/apply-job/list-created">我的申请</Link></Menu.Item>
+                    <Menu.Item key="7"><Link to="/back/apply-job/list">申请列表</Link></Menu.Item>
+                    <Menu.Item key="8"><Link to="/back/apply-job/list-created">我的申请</Link></Menu.Item>
                 </SubMenu>
             </Menu>
         </Sider>

@@ -7,7 +7,6 @@ import {UserAuthoritiesManageModal} from "../../page/back/auth/user/user-authori
 import {useState} from "react";
 import {getAuthorityTypeInfo} from "../../type/authority";
 import {WoodlandPopover} from "../woodland/woodland-popover";
-import {ApplyJobPopover} from "../apply-job/apply-job-popover";
 
 export const UserInfo = ({account}:{account: string}) => {
 

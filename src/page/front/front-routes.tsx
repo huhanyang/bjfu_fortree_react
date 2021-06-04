@@ -1,6 +1,6 @@
 import {Navigate, Route, Routes} from "react-router";
 import React from "react";
-import {FrontMap} from "./map";
+import {FrontMap} from "./map/front-map";
 
 export const FrontRoutes = () => {
     return (

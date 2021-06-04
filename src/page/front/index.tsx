@@ -1,30 +1,47 @@
 import {Link} from "react-router-dom";
-import { Layout, Menu } from 'antd';
+import {Layout, Menu} from 'antd';
+import React from "react";
 import {FrontRoutes} from "./front-routes";
-import '../common.css';
-const { Header, Content, Footer } = Layout;
+import styled from "@emotion/styled";
 
 export const FrontPage = () => {
 
     return (
-        <Layout style={{ height: '100%'}}>
-            <Header className="header">
-                <div className="logo">
-                    <h1 style={{color: 'green'}}><img src="/icon/tree.svg" style={{paddingBottom: '8px'}} />树木数据库</h1>
-                </div>
-                <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['1']}>
-                    <Menu.Item key="1"><Link to="/front/index">主页</Link></Menu.Item>
-                    <Menu.Item key="2"><Link to="/front/login">登录</Link></Menu.Item>
+        <Layout style={{ minHeight: "100vh" }}>
+            <Header>
+                <Menu mode="horizontal" defaultSelectedKeys={['1']} style={{float: "left"}}>
+                    <Menu.Item key="1"><Link to="/front/map">地图</Link></Menu.Item>
+                    <Menu.Item key="2"><Link to="/back/login">登录</Link></Menu.Item>
+                    <Menu.Item key="3"><Link to="/back/register">注册</Link></Menu.Item>
                 </Menu>
+                <LogoDiv><Link to="/front">树木数据库</Link></LogoDiv>
             </Header>
             <Layout>
-                <Content style={{ margin: '24px 16px 0', height: '100%' }}>
-                    <div className="site-layout-background" style={{ padding: 24, minHeight: 360 }}>
+                <Layout>
+                    <Content>
                         <FrontRoutes />
-                    </div>
-                </Content>
-                <Footer style={{ textAlign: 'center' }}>Ant Design React ©2018 Created by Ant UED</Footer>
+                    </Content>
+                </Layout>
             </Layout>
         </Layout>
     );
 }
+
+const Header = styled(Layout.Header)`
+  background: #fff;
+  padding: 0;
+  text-align: center;
+  font-size: 30px;
+  font-weight: bold;
+`;
+
+const Content = styled(Layout.Content)`
+  background: #fff;
+  margin: 24px 16px;
+  padding: 24px;
+`;
+
+const LogoDiv = styled.div`
+  float: right;
+  padding: 0 24px;
+`;

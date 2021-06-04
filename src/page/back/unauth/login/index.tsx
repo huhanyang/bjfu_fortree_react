@@ -41,8 +41,11 @@ export const Login = () => {
                 </Form.Item>
             </Form>
             <Divider />
-            <Link style={{ float: "left" }} to={"../register"}>
+            <Link style={{ float: "left" }} to={"/back/register"}>
                 去注册
+            </Link>
+            <Link style={{ float: "right" }} to={"/front"}>
+                去首页
             </Link>
         </>
     );

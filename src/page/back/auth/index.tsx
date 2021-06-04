@@ -43,7 +43,7 @@ export const AuthenticatedApp = () => {
                         collapsed ? MenuUnfoldOutlined : MenuFoldOutlined
                     )}
                 </Hover>
-                <Link to="/front">BJFU 竞赛网</Link>
+                <Link to="/front">树木数据库</Link>
                 <AvatarDiv>
                     <Dropdown overlay={menu}>
                         <Avatar size="large">{user?.name}</Avatar>

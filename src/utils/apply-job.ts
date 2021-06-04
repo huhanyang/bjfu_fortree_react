@@ -4,8 +4,6 @@ import {useHttp} from "./http";
 import {useMutation, useQuery} from "react-query";
 import {cleanObject} from "./index";
 import {useNoOpsConfig} from "./use-optimistic-options";
-import {EditRecordRequestParams} from "./woodland";
-import {getToken} from "../auth-provider";
 import {OssFile} from "../type/oss-file";
 import {message} from "antd";
 

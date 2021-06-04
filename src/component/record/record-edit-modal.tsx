@@ -1,5 +1,5 @@
 import React from "react";
-import {EditRecordRequestParams, useEditRecord, useWoodland} from "../../utils/woodland";
+import {EditRecordRequestParams, useEditRecord} from "../../utils/woodland";
 import {Button, DatePicker, Form, Input, message, Modal, Switch} from "antd";
 import {Record} from "../../type/record";
 import moment from "moment";
