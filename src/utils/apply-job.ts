@@ -1,10 +1,13 @@
-import {PageAndSingleFieldSorterRequest} from "../type/request";
+import {Page, PageAndSingleFieldSorterRequest} from "../type/request";
 import {ApplyJob, ApplyJobState, ApplyJobType} from "../type/apply-job";
 import {useHttp} from "./http";
 import {useMutation, useQuery} from "react-query";
 import {cleanObject} from "./index";
 import {useNoOpsConfig} from "./use-optimistic-options";
 import {EditRecordRequestParams} from "./woodland";
+import {getToken} from "../auth-provider";
+import {OssFile} from "../type/oss-file";
+import {message} from "antd";
 
 
 export interface GetApplyJobsRequestParams extends PageAndSingleFieldSorterRequest{
@@ -14,7 +17,7 @@ export interface GetApplyJobsRequestParams extends PageAndSingleFieldSorterReque
 
 export const useApplyJobs = (params: Partial<GetApplyJobsRequestParams>) => {
     const client = useHttp();
-    return useQuery<ApplyJob[]>(
+    return useQuery<Page<ApplyJob>>(
         ["apply-job", "apply-jobs", cleanObject(params)],
         () => client(`applyJob/getApplyJobs`, {data: params, method: "POST"}),
         {enabled: Boolean(params)}
@@ -32,7 +35,7 @@ export const useApplyJob = (id: number) => {
 
 export const useMyApplyJobs = (params: Partial<GetApplyJobsRequestParams>) => {
     const client = useHttp();
-    return useQuery<ApplyJob[]>(
+    return useQuery<Page<ApplyJob>>(
         ["apply-job", "apply-jobs", cleanObject(params)],
         () => client(`applyJob/getMyApplyJobs`, {data: params, method: "POST"}),
         {enabled: Boolean(params)}
@@ -70,4 +73,26 @@ export const useCancelApplyJob = () => {
     );
 }
 
-// todo useDownloadFile 使用getApplyJobDownloadFileUrl接口 并生成a标签 直接进行下载
+export interface GetApplyJobDownloadFileUrlRequestParams {
+    id: number;
+    isUploadFile: boolean;
+}
+
+export const useDownloadApplyJobFile = () => {
+    const client = useHttp();
+    return useMutation(
+        (params:GetApplyJobDownloadFileUrlRequestParams) =>
+            client(`applyJob/getApplyJobDownloadFileInfo`, {data: params}).then((file: OssFile)=>{
+                if(file.url) {
+                    const link = document.createElement('a');
+                    link.href = file.url;
+                    link.download = file.fileName;
+                    link.click();
+                } else {
+                    message.error("文件下载失败！");
+                    console.error("getApplyJobDownloadFileInfo not return url!")
+                }
+            }),
+        useNoOpsConfig(["apply-job"])
+    );
+}

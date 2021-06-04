@@ -1,5 +1,6 @@
 import {User} from "./type/user";
 import {Result} from "./type/result";
+import {message} from "antd";
 
 const apiUrl = process.env.REACT_APP_API_URL;
 
@@ -8,6 +9,10 @@ export const localStorageKey = "__auth_provider_token__";
 export const getToken = () => window.localStorage.getItem(localStorageKey);
 
 const handleUserResponse = (result: Result<User>) => {
+    if(result.code !== 101) {
+        message.error(result.msg);
+        return null;
+    }
     window.localStorage.setItem(localStorageKey, result.object.token || "");
     return result.object;
 };

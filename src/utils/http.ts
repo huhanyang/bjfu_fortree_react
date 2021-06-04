@@ -3,6 +3,7 @@ import { useCallback } from "react";
 import { message } from "antd";
 import {useAuth} from "../context/auth-context";
 import * as auth from "../auth-provider";
+import {localStorageKey} from "../auth-provider";
 
 const apiUrl = process.env.REACT_APP_API_URL;
 
@@ -29,7 +30,6 @@ export const http = async (
         },
         ...customConfig,
     };
-
     if (config.method.toUpperCase() === "GET") {
         endpoint += `?${qs.stringify(data)}`;
     } else if (config.method.toUpperCase() === "DELETE") {
@@ -45,21 +45,21 @@ export const http = async (
     return window
         .fetch(`${apiUrl}/${endpoint}`, config)
         .then(async (response) => {
-            if (response.status === 401) {
-                // todo 重新登录等请求统一处理位置
-                await auth.logout();
-                window.location.reload();
-                return Promise.reject({ message: "请重新登录" });
-            }
             const data = await response.json();
-            if (response.ok && data.code === 100) {
-                return data.object;
-            } else if (response.ok) {
-                message.error(data.msg);
-                return data.object;
-            } else {
-                return Promise.reject(data);
+            if(data&&data.code&&response.ok) {
+                if(data.code === 202 || data.code === 303 || data.code === 304 || data.code === 305) {
+                    // token出错
+                    await auth.logout();
+                    window.location.reload();
+                    return Promise.reject({ message: "请重新登录" });
+                }
+                if (data.code === 101) {
+                    return data.object;
+                } else {
+                    message.error(data.msg);
+                }
             }
+            return Promise.reject(response.statusText);
         });
 };
 

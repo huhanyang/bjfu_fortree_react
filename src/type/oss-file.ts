@@ -5,4 +5,5 @@ export interface OssFile {
     lastModifiedTime: string;
     fileName: string;
     expiresTime?: string;
+    url?: string;
 }

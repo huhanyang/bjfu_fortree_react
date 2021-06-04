@@ -1,10 +1,11 @@
-import {Point, Woodland, WoodlandShape} from "../type/woodland";
-import {PageAndSingleFieldSorterRequest} from "../type/request";
+import {Woodland, WoodlandShape} from "../type/woodland";
+import {Page, PageAndSingleFieldSorterRequest} from "../type/request";
 import {useHttp} from "./http";
 import {useMutation, useQuery} from "react-query";
 import {useNoOpsConfig} from "./use-optimistic-options";
 import {cleanObject} from "./index";
 import {Tree} from "../type/tree";
+import {Point} from "../type/Point";
 
 export interface CreateWoodlandRequestParams {
     name: string;
@@ -96,7 +97,7 @@ export const useAddTreesByExcel = () => {
             formData.append("file", params.file);
             return client(`woodland/addTreesByExcel`, {
                 method: "POST",
-                data: params,
+                data: formData,
                 isFile: true
             })
         },
@@ -202,7 +203,7 @@ export interface GetWoodlandsRequestParams extends PageAndSingleFieldSorterReque
 
 export const useWoodlands = (params: Partial<GetWoodlandsRequestParams>) => {
     const client = useHttp();
-    return useQuery<Woodland[]>(
+    return useQuery<Page<Woodland>>(
         ["woodland", "woodlands", cleanObject(params)],
         () => client(`woodland/getWoodlands`, {data: params, method: "POST"}),
         {enabled: Boolean(params)}
@@ -219,7 +220,7 @@ export const useAllWoodlands = () => {
 
 export const useWoodlandsByCreator = (params: Partial<GetWoodlandsRequestParams>) => {
     const client = useHttp();
-    return useQuery<Woodland[]>(
+    return useQuery<Page<Woodland>>(
         ["woodland", "created-woodlands", cleanObject(params)],
         () => client(`woodland/getWoodlandsByCreator`, {data: params, method: "POST"}),
         {enabled: Boolean(params)}
@@ -228,7 +229,7 @@ export const useWoodlandsByCreator = (params: Partial<GetWoodlandsRequestParams>
 
 export const useWoodland = (id: number) => {
     const client = useHttp();
-    return useQuery<Woodland[]>(
+    return useQuery<Woodland>(
         ["woodland", id],
         () => client(`woodland/getWoodlandDetail`, {data: {id}}),
     {enabled: Boolean(id)}
@@ -236,15 +237,17 @@ export const useWoodland = (id: number) => {
 }
 
 export interface GetTreesRequestParams extends PageAndSingleFieldSorterRequest {
-    treeId: string;
-    species: string;
+    recordId: number;
+    treeId?: string;
+    species?: string;
 }
 
 export const useTrees = (params: Partial<GetTreesRequestParams>) => {
     const client = useHttp();
     return useQuery<Tree[]>(
         ["woodland", "trees", cleanObject(params)],
-        () => client(`woodland/getTrees`, {data: params, method: "POST"}),
+        () => client(`woodland/getTrees`, {data: params, method: "POST"})
+            .then(treesPage=> treesPage.content),
         {enabled: Boolean(params)}
     );
 }

@@ -3,9 +3,10 @@ import {User, UserState, UserType} from "../type/user";
 import {useMutation, useQuery} from "react-query";
 import {AuthorityType} from "../type/authority";
 import {useNoOpsConfig} from "./use-optimistic-options";
-import {PageAndSingleFieldSorterRequest} from "../type/request";
+import {Page, PageAndSingleFieldSorterRequest} from "../type/request";
+import {cleanObject} from "./index";
 
-export const useUserInfo = (account?: string) => {
+export const useUserInfo = (account: string) => {
     const client = useHttp();
     return useQuery<User>(
         ["user", "info", account],
@@ -15,19 +16,18 @@ export const useUserInfo = (account?: string) => {
 };
 
 export interface GetUsersRequestParams extends PageAndSingleFieldSorterRequest {
-    account: string[];
-    name: string[];
-    organization: string[];
+    account: string;
+    name: string;
+    organization: string;
     state: UserState[];
     type: UserType[];
 }
 
-export const useUsers = (params: GetUsersRequestParams) => {
+export const useUsers = (params: Partial<GetUsersRequestParams>) => {
     const client = useHttp();
-    return useQuery<User>(
-        ["user", "users"],
-        () => client(`user/getUsers`, {data: params}),
-        {enabled: Boolean(params)}
+    return useQuery<Page<User>>(
+        ["user", "users", cleanObject(params)],
+        () => client(`user/getUsers`, {data: params, method: "POST"})
     );
 }
 

@@ -6,6 +6,7 @@ import {useAsync} from "../utils/use-async";
 import * as auth from "../auth-provider";
 import {localStorageKey, LoginRequestParams, RegisterRequestParams} from "../auth-provider";
 import {useQueryClient} from "react-query";
+import {message} from "antd";
 
 const bootstrapUser = async () => {
     let user = null;
@@ -13,7 +14,9 @@ const bootstrapUser = async () => {
     if (token) {
         // 刷新token
         user = await http("user/me", {token});
-        window.localStorage.setItem(localStorageKey, user.token || "");
+        if(user&&user.token&&user.token.length>10) {
+            window.localStorage.setItem(localStorageKey, user.token || "");
+        }
     }
     return user;
 };

@@ -2,8 +2,14 @@ import {Polygon} from "../type/Polygon";
 import {useHttp} from "./http";
 import {useMutation} from "react-query";
 import {useNoOpsConfig} from "./use-optimistic-options";
+import {getToken} from "../auth-provider";
 
-//todo 导出并下载文件 exportWoodlandDetailInfo 生成a标签直接下载
+const apiUrl = process.env.REACT_APP_API_URL;
+export const exportWoodlandDetailInfo = (id: number, woodlandName: string) => {
+    const link = document.createElement('a');
+    link.href = `${apiUrl}/export/exportWoodlandDetailInfo?id=${id}&token=${getToken()}`;
+    link.click();
+}
 
 export interface ExportWoodlandsInfoRequestParams {
     ids: number[];

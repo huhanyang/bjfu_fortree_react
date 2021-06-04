@@ -2,7 +2,7 @@ import React from "react";
 
 export interface PageAndSingleFieldSorterRequest {
   pagination: Pagination;
-  sorter: SingleFieldSorter[];
+  sorter?: SingleFieldSorter[];
 }
 
 export interface Pagination {
@@ -13,5 +13,14 @@ export interface Pagination {
 export interface SingleFieldSorter {
   field?: React.Key | readonly React.Key[];
   order?: "ASC" | "DESC";
-  multiple: number;
+}
+
+export interface Page<T> {
+  content: T[];
+  empty: boolean;
+  first: boolean
+  last: boolean
+  size: number;
+  totalElements: number;
+  totalPages: number;
 }
