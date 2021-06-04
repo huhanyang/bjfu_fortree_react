@@ -3,7 +3,7 @@ import styled from "@emotion/styled";
 import {Avatar, Button, Dropdown, Layout, Menu} from "antd";
 import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
 import {Link} from "react-router-dom";
-import {generatePath} from "react-router";
+import {generatePath, useNavigate} from "react-router";
 import {AuthRoutes} from "./auth-routes";
 import {useAuth} from "../../../context/auth-context";
 import {AdminSider} from "./admin-sider";
@@ -13,6 +13,7 @@ import {UserSider} from "./user-sider";
 export const AuthenticatedApp = () => {
     const [collapsed, setCollapsed] = useState(false);
     const { logout, user } = useAuth();
+    const navigate = useNavigate();
 
     const menu = (
         <Menu>
@@ -26,7 +27,9 @@ export const AuthenticatedApp = () => {
                 </Link>
             </Menu.Item>
             <Menu.Item key="logout">
-                <Button type="link" onClick={logout}>退出登录</Button>
+                <Button type="link" onClick={()=>{
+                    logout().then(()=>{navigate("/back/login", { replace: true });});
+                }}>退出登录</Button>
             </Menu.Item>
         </Menu>
     );

@@ -4,15 +4,17 @@ import {Divider, Form, Input, message} from "antd";
 import {CardTitle, LongButton} from "../index";
 import {Link} from "react-router-dom";
 import {LoginRequestParams} from "../../../../auth-provider";
+import {useNavigate} from "react-router";
 
 
 export const Login = () => {
     const { login } = useAuth();
     const { run, isLoading } = useAsync(undefined, { throwOnError: true });
+    const navigate = useNavigate();
 
     const handleSubmit = async (values: LoginRequestParams) => {
         try {
-            await run(login(values));
+            await run(login(values)).then(()=>{navigate("/back", { replace: true });});
         } catch (e) {
             message.error(e.message);
         }

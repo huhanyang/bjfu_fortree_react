@@ -4,15 +4,17 @@ import {Link} from "react-router-dom";
 import {useAuth} from "../../../../context/auth-context";
 import {useAsync} from "../../../../utils/use-async";
 import {RegisterRequestParams} from "../../../../auth-provider";
+import {useNavigate} from "react-router";
 
 export const Register = () => {
 
     const { register } = useAuth();
     const { run, isLoading } = useAsync(undefined, { throwOnError: true });
+    const navigate = useNavigate();
 
     const handleSubmit = async (values: RegisterRequestParams) => {
         try {
-            await run(register(values));
+            await run(register(values)).then(()=>{navigate("/back", { replace: true });});
         } catch (e) {
             message.error(e.message);
         }

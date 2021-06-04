@@ -26,6 +26,7 @@ export const WoodlandRoutes = () => {
         return (
             <Routes>
                 <Route path="/map" element={<WoodlandMap />} />
+                <Route path="/create" element={<WoodlandCreate />} />
                 <Route path="/info/:id" element={<WoodlandInfo />} />
                 <Route path="/list" element={<WoodlandList />} />
                 <Route path="/list-created" element={<WoodlandListCreated />} />
