@@ -18,13 +18,10 @@ export const AuthenticatedApp = () => {
     const menu = (
         <Menu>
             <Menu.Item key="my-info">
-                <Link
-                    to={generatePath("/back/user/info/:account", {
-                        account: String(user?.account),
-                    })}
-                >
-                    个人信息
-                </Link>
+                <Button type="link" onClick={()=>{
+                    navigate(generatePath("/back/user/info/:account", {account: String(user?.account),}),
+                        { replace: true });
+                }}>个人信息</Button>
             </Menu.Item>
             <Menu.Item key="logout">
                 <Button type="link" onClick={()=>{
