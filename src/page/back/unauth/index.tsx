@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 import { Button, Card, Row, Col } from "antd";
 import {UnAuthRoutes} from "./unauth-routes";
+import {Link} from "react-router-dom";
 
 
 export const UnAuthenticatedApp = () => {
@@ -16,7 +17,7 @@ export const UnAuthenticatedApp = () => {
                 xl={8}
                 style={{ paddingTop: "5vh", paddingBottom: "10vh" }}
             >
-                <Header>树木数据库</Header>
+                <Header><Link to="/front">树木数据库</Link></Header>
                 <ShadowCard>
                     <UnAuthRoutes />
                 </ShadowCard>
