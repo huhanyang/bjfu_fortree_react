@@ -6,6 +6,8 @@ import {cleanObject} from "./index";
 import {useNoOpsConfig} from "./use-optimistic-options";
 import {OssFile} from "../type/oss-file";
 import {message} from "antd";
+const appUrl = process.env.REACT_APP_URL;
+const ossUrl = process.env.REACT_APP_OSS_URL;
 
 
 export interface GetApplyJobsRequestParams extends PageAndSingleFieldSorterRequest{
@@ -75,9 +77,6 @@ export interface GetApplyJobDownloadFileUrlRequestParams {
     id: number;
     isUploadFile: boolean;
 }
-
-const appUrl = process.env.REACT_APP_URL;
-const ossUrl = process.env.OSS_URL;
 
 export const useDownloadApplyJobFile = () => {
     const client = useHttp();
