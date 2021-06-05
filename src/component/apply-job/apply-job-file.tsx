@@ -15,10 +15,10 @@ export const ApplyJobFile = ({file, applyJobId, isUploadFile}:{file: OssFile|und
                         <div>
                             文件名:{file.fileName}
                             <br />
-                            创建时间:{new Date(file.createdTime).toLocaleDateString()}
+                            创建时间:{new Date(file.createdTime).toLocaleString()}
                             {file.expiresTime?<>
                                 <br />
-                                过期时间:{new Date(file.expiresTime).toLocaleDateString()}
+                                过期时间:{new Date(file.expiresTime).toLocaleString()}
                             </>:<></>}
                         </div>
                     }

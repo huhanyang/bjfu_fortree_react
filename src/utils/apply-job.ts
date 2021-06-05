@@ -76,6 +76,9 @@ export interface GetApplyJobDownloadFileUrlRequestParams {
     isUploadFile: boolean;
 }
 
+const appUrl = process.env.REACT_APP_URL;
+const ossUrl = process.env.OSS_URL;
+
 export const useDownloadApplyJobFile = () => {
     const client = useHttp();
     return useMutation(
@@ -83,7 +86,11 @@ export const useDownloadApplyJobFile = () => {
             client(`applyJob/getApplyJobDownloadFileInfo`, {data: params}).then((file: OssFile)=>{
                 if(file.url) {
                     const link = document.createElement('a');
-                    link.href = file.url;
+                    if(appUrl&&ossUrl) {
+                        link.href = file.url.replace(ossUrl, appUrl);
+                    } else {
+                        link.href = file.url;
+                    }
                     link.download = file.fileName;
                     link.click();
                 } else {

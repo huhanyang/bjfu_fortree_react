@@ -14,7 +14,7 @@ export const ApplyJobPopover = ({ applyJob }: { applyJob: ApplyJob | undefined }
                         <div>
                             申请类型:{getApplyJobTypeInfo(applyJob.type)}
                             <br />
-                            申请时间:{new Date(applyJob.createdTime).toLocaleDateString()}
+                            申请时间:{new Date(applyJob.createdTime).toLocaleString()}
                             <br />
                             申请状态:{getApplyJobStateInfo(applyJob.state)}
                             <br />
@@ -23,7 +23,7 @@ export const ApplyJobPopover = ({ applyJob }: { applyJob: ApplyJob | undefined }
                                 <br />
                                 操作人:{<UserPopover user={applyJob.operateUser} />}
                                 <br />
-                                操作时间:{new Date(applyJob.operateTime).toLocaleDateString()}
+                                操作时间:{new Date(applyJob.operateTime).toLocaleString()}
                             </>:<></>}
                         </div>
                     }

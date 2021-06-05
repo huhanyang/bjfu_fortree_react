@@ -177,7 +177,7 @@ export const UserList = () => {
                     key="createdTime"
                     dataIndex="createdTime"
                     sorter={{ multiple: 6 }}
-                    render={(text, record) => new Date(record.createdTime).toLocaleDateString()}
+                    render={(text, record) => new Date(record.createdTime).toLocaleString()}
                 />
                 <Table.Column<User>
                     title="操作"

@@ -21,6 +21,7 @@ export const UserInfo = ({account}:{account: string}) => {
                 <PageLoading />
             ) : (
                 <Descriptions
+                    bordered
                     title="个人信息"
                     extra={me?.type==="ADMIN"&&user?<>
                         <Button onClick={()=>{setAuthorityManageModalVisible(true);}}>管理权限</Button>
@@ -48,7 +49,7 @@ export const UserInfo = ({account}:{account: string}) => {
                     <Descriptions.Item label="组织">{user?.name}</Descriptions.Item>
                     <Descriptions.Item label="类型">{user?getUserTypeInfo(user.type):""}</Descriptions.Item>
                     <Descriptions.Item label="状态">{user?getUserStateInfo(user.state):""}</Descriptions.Item>
-                    <Descriptions.Item label="注册时间">{user?new Date(user?.createdTime).toLocaleDateString():""}</Descriptions.Item>
+                    <Descriptions.Item label="注册时间">{user?new Date(user?.createdTime).toLocaleString():""}</Descriptions.Item>
                     <Descriptions.Item span={2} label="权限">{user?.authorities?.map(authority=><>{getAuthorityTypeInfo(authority.type)}<br/></>)}</Descriptions.Item>
                     <Descriptions.Item span={2} label="林地">{user?.woodlands?.map(woodland=><WoodlandPopover woodland={woodland} />)}</Descriptions.Item>
                 </Descriptions>

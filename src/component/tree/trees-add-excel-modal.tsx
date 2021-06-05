@@ -40,7 +40,7 @@ export const TreesAddExcelModal = ({
                 setVisible(false);
             }}
         >
-            <Upload beforeUpload={file => {
+            <Upload maxCount={1} beforeUpload={file => {
                 setFile(file);
                 return false;
             }}>

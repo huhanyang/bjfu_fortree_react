@@ -42,7 +42,7 @@ export const WoodlandInfo = ({id}:{id: number}) => {
                 <Descriptions.Item label="最大树高(cm)">{recordInfo.maxHeight}</Descriptions.Item>
                 <Descriptions.Item label="最小树高(cm)">{recordInfo.minHeight}</Descriptions.Item>
                 <Descriptions.Item label="平均树高(cm)">{recordInfo.meanHeight}</Descriptions.Item>
-                <Descriptions.Item label="测量时间">{new Date(recordInfo.measureTime).toLocaleDateString()}</Descriptions.Item>
+                <Descriptions.Item label="测量时间">{new Date(recordInfo.measureTime).toLocaleString()}</Descriptions.Item>
                 <Descriptions.Item label="附加信息">{recordInfo.addition}</Descriptions.Item>
             </Descriptions>
         );
@@ -84,7 +84,7 @@ export const WoodlandInfo = ({id}:{id: number}) => {
                             {
                                 // @ts-ignore
                                 woodland.records.map((record) => <Select.Option value={woodland.records.indexOf(record)}>
-                                    {new Date(record.measureTime).toLocaleDateString()}
+                                    {new Date(record.measureTime).toLocaleString()}
                                 </Select.Option>)
                             }
                         </Select>

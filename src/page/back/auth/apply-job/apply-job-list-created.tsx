@@ -91,7 +91,7 @@ export const ApplyJobListCreated = () => {
                     key="createdTime"
                     dataIndex="createdTime"
                     sorter={{ multiple: 3 }}
-                    render={(text, record) => new Date(record.createdTime).toLocaleDateString()}
+                    render={(text, record) => new Date(record.createdTime).toLocaleString()}
                 />
                 <Table.Column<ApplyJob>
                     title="操作人"
@@ -104,7 +104,7 @@ export const ApplyJobListCreated = () => {
                     key="operateTime"
                     dataIndex="operateTime"
                     sorter={{ multiple: 4 }}
-                    render={(text, record) => new Date(record.operateTime).toLocaleDateString()}
+                    render={(text, record) => new Date(record.operateTime).toLocaleString()}
                 />
                 <Table.Column<ApplyJob>
                     title="操作"

@@ -13,7 +13,7 @@ import {SearchOutlined} from "@ant-design/icons";
 import {getWoodlandShapeInfo, Woodland} from "../../../../type/woodland";
 import {User} from "../../../../type/user";
 import {UserPopover} from "../../../../component/user/user-popover";
-import {generatePath} from "react-router";
+import {generatePath, useNavigate} from "react-router";
 import {Link} from "react-router-dom";
 import {useExportWoodlandsInfo} from "../../../../utils/export";
 
@@ -29,6 +29,7 @@ export const WoodlandList = () => {
     const {data: woodlands, isLoading: isWoodlandsLoading} = useWoodlands(requestParams);
     const [selectedWoodlandIds, setSelectedWoodlandIds] = useState<number[]>([]);
     const {mutateAsync: exportWoodlands, isLoading: isExportWoodlandsLoading} = useExportWoodlandsInfo();
+    const navigate = useNavigate();
 
 
     const handleTableChange = (
@@ -110,7 +111,8 @@ export const WoodlandList = () => {
             <div style={{ marginBottom: 16 }}>
                 <Button type="primary" onClick={async () => {
                     try {
-                        await exportWoodlands({ids: selectedWoodlandIds});
+                        await exportWoodlands({ids: selectedWoodlandIds})
+                            .then(()=>{navigate("/back/apply-job/list", { replace: true });});
                     } catch (e) {
                         message.error(e.message);
                     }
@@ -213,7 +215,7 @@ export const WoodlandList = () => {
                     key="createdTime"
                     dataIndex="createdTime"
                     sorter={{ multiple: 8 }}
-                    render={(text, record) => new Date(record.createdTime).toLocaleDateString()}
+                    render={(text, record) => new Date(record.createdTime).toLocaleString()}
                 />
                 <Table.Column<Woodland>
                     title="操作"

@@ -6,6 +6,8 @@ import {useNoOpsConfig} from "./use-optimistic-options";
 import {cleanObject} from "./index";
 import {Tree} from "../type/tree";
 import {Point} from "../type/Point";
+import {ApplyJob} from "../type/apply-job";
+import {message} from "antd";
 
 export interface CreateWoodlandRequestParams {
     name: string;
@@ -27,6 +29,10 @@ export const useCreateWoodland = () => {
             client(`woodland/createWoodland`, {
                 method: "POST",
                 data: params
+            }).then((applyJob: ApplyJob)=>{
+                if(applyJob.state==="APPLYING") {
+                    message.success("申请成功, 等待审批！", 3);
+                }
             }),
         useNoOpsConfig(["woodland"])
     );
@@ -50,6 +56,10 @@ export const useAddRecord = () => {
             client(`woodland/addRecord`, {
                 method: "POST",
                 data: params
+            }).then((applyJob: ApplyJob)=>{
+                if(applyJob.state==="APPLYING") {
+                    message.success("申请成功, 等待审批！", 3);
+                }
             }),
         useNoOpsConfig(["woodland"])
     );
@@ -76,6 +86,10 @@ export const useAddTrees = () => {
             client(`woodland/addTrees`, {
                 method: "POST",
                 data: params
+            }).then((applyJob: ApplyJob)=>{
+                if(applyJob.state==="APPLYING") {
+                    message.success("申请成功, 等待审批！", 3);
+                }
             }),
         useNoOpsConfig(["woodland"])
     );
@@ -99,6 +113,10 @@ export const useAddTreesByExcel = () => {
                 method: "POST",
                 data: formData,
                 isFile: true
+            }).then((applyJob: ApplyJob)=>{
+                if(applyJob.state==="APPLYING") {
+                    message.success("申请成功, 等待审批！", 3);
+                }
             })
         },
         useNoOpsConfig(["woodland"])
@@ -112,6 +130,10 @@ export const useDeleteWoodland = () => {
             client(`woodland/deleteWoodland`, {
                 method: "DELETE",
                 data: {id}
+            }).then((applyJob: ApplyJob)=>{
+                if(applyJob.state==="APPLYING") {
+                    message.success("申请成功, 等待审批！", 3);
+                }
             }),
         useNoOpsConfig(["woodland"])
     );
@@ -124,6 +146,10 @@ export const useDeleteRecord = () => {
             client(`woodland/deleteRecord`, {
                 method: "DELETE",
                 data: {id}
+            }).then((applyJob: ApplyJob)=>{
+                if(applyJob.state==="APPLYING") {
+                    message.success("申请成功, 等待审批！", 3);
+                }
             }),
         useNoOpsConfig(["woodland"])
     );
@@ -141,6 +167,10 @@ export const useDeleteTrees = () => {
             client(`woodland/deleteTrees`, {
                 method: "POST",
                 data: params
+            }).then((applyJob: ApplyJob)=>{
+                if(applyJob.state==="APPLYING") {
+                    message.success("申请成功, 等待审批！", 3);
+                }
             }),
         useNoOpsConfig(["woodland"])
     );
@@ -167,6 +197,10 @@ export const useEditWoodland = () => {
             client(`woodland/editWoodland`, {
                 method: "POST",
                 data: params
+            }).then((applyJob: ApplyJob)=>{
+                if(applyJob.state==="APPLYING") {
+                    message.success("申请成功, 等待审批！", 3);
+                }
             }),
         useNoOpsConfig(["woodland"])
     );
@@ -189,6 +223,10 @@ export const useEditRecord = () => {
             client(`woodland/editRecord`, {
                 method: "POST",
                 data: params
+            }).then((applyJob: ApplyJob)=>{
+                if(applyJob.state==="APPLYING") {
+                    message.success("申请成功, 等待审批！", 3);
+                }
             }),
         useNoOpsConfig(["woodland"])
     );

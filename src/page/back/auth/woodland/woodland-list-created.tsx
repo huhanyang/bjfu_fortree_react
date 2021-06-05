@@ -186,7 +186,7 @@ export const WoodlandListCreated = () => {
                     key="createdTime"
                     dataIndex="createdTime"
                     sorter={{ multiple: 7 }}
-                    render={(text, record) => new Date(record.createdTime).toLocaleDateString()}
+                    render={(text, record) => new Date(record.createdTime).toLocaleString()}
                 />
                 <Table.Column<Woodland>
                     title="操作"
