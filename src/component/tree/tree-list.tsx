@@ -122,8 +122,9 @@ export const TreeList = ({woodlandId, recordId}:{woodlandId: number, recordId: n
             </div>
             <Table<Tree>
                 rowKey="id"
-                dataSource={trees}
+                dataSource={trees?.content}
                 loading={isTreesLoading}
+                pagination={{...requestParams.pagination, total: trees?.totalElements, showSizeChanger: true}}
                 onChange={handleTableChange}
                 rowSelection={
                     woodland?.creator?.account === me?.account ||

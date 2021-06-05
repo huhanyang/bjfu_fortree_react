@@ -282,7 +282,7 @@ export interface GetTreesRequestParams extends PageAndSingleFieldSorterRequest {
 
 export const useTrees = (params: Partial<GetTreesRequestParams>) => {
     const client = useHttp();
-    return useQuery<Tree[]>(
+    return useQuery<Page<Tree>>(
         ["woodland", "trees", cleanObject(params)],
         () => client(`woodland/getTrees`, {data: params, method: "POST"})
             .then(treesPage=> treesPage.content),
