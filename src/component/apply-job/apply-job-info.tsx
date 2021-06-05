@@ -70,9 +70,9 @@ export const ApplyJobInfo = ({applyJobId}:{applyJobId: number}) => {
                             <Descriptions.Item label="操作人">{<UserPopover user={applyJob.operateUser} />}</Descriptions.Item>
                             <Descriptions.Item label="操作时间">{new Date(applyJob.operateTime).toLocaleString()}</Descriptions.Item>
                         </>:<></>}
-                        <Descriptions.Item label="申请参数">{applyJob.applyParam}</Descriptions.Item>
                         <Descriptions.Item label="申请文件">{<ApplyJobFile applyJobId={applyJobId} isUploadFile={true} file={applyJob.uploadFile} />}</Descriptions.Item>
                         <Descriptions.Item label="下载文件">{<ApplyJobFile applyJobId={applyJobId} isUploadFile={false} file={applyJob.downloadFile} />}</Descriptions.Item>
+                        <Descriptions.Item span={3} label="申请参数">{applyJob.applyParam}</Descriptions.Item>
                     </Descriptions>
                 </>:<></>}
             </>}
