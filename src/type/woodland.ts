@@ -1,6 +1,6 @@
 import {User} from "./user";
 import {Record} from "./record";
-import {Point} from "./Point";
+import {Point} from "./point";
 
 export type WoodlandShape = "SQUARE"|"RECTANGLE"|"CIRCULAR";
 

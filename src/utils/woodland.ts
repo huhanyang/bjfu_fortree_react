@@ -5,7 +5,7 @@ import {useMutation, useQuery} from "react-query";
 import {useNoOpsConfig} from "./use-optimistic-options";
 import {cleanObject} from "./index";
 import {Tree} from "../type/tree";
-import {Point} from "../type/Point";
+import {Point} from "../type/point";
 import {ApplyJob} from "../type/apply-job";
 import {message} from "antd";
 

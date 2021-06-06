@@ -1,6 +1,6 @@
 import {Button, Form, Input, message, Modal, Select} from "antd";
 import {useState} from "react";
-import {Point} from "../../../../type/Point";
+import {Point} from "../../../../type/point";
 import {Map, Marker} from 'react-bmapgl';
 import {CreateWoodlandRequestParams, useCreateWoodland} from "../../../../utils/woodland";
 import {useNavigate} from "react-router";

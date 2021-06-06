@@ -1,4 +1,4 @@
-import {Polygon} from "../type/Polygon";
+import {Polygon} from "../type/polygon";
 import {useHttp} from "./http";
 import {useMutation} from "react-query";
 import {useNoOpsConfig} from "./use-optimistic-options";
