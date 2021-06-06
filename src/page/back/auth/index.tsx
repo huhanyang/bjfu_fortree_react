@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import styled from "@emotion/styled";
 import {Avatar, Button, Dropdown, Layout, Menu} from "antd";
-import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
+import {MenuFoldOutlined, MenuUnfoldOutlined} from "@ant-design/icons";
 import {Link} from "react-router-dom";
 import {generatePath, useNavigate} from "react-router";
 import {AuthRoutes} from "./auth-routes";

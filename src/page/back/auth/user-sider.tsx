@@ -1,11 +1,7 @@
-import { Layout, Menu } from "antd";
-import {
-    GlobalOutlined,
-    NotificationOutlined,
-    UserOutlined,
-} from "@ant-design/icons";
+import {Layout, Menu} from "antd";
+import {GlobalOutlined, NotificationOutlined, UserOutlined,} from "@ant-design/icons";
 import React from "react";
-import { Link } from "react-router-dom";
+import {Link} from "react-router-dom";
 import {generatePath} from "react-router";
 import {useAuth} from "../../../context/auth-context";
 

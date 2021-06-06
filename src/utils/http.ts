@@ -1,6 +1,6 @@
 import qs from "qs";
-import { useCallback } from "react";
-import { message } from "antd";
+import {useCallback} from "react";
+import {message} from "antd";
 import {useAuth} from "../context/auth-context";
 import * as auth from "../auth-provider";
 

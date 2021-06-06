@@ -1,9 +1,7 @@
 import React, {useState} from "react";
-import {
-    useAddTreesByExcel
-} from "../../utils/woodland";
+import {useAddTreesByExcel} from "../../utils/woodland";
 import {Button, message, Modal, Upload} from "antd";
-import { UploadOutlined } from '@ant-design/icons';
+import {UploadOutlined} from '@ant-design/icons';
 import {RcFile} from "antd/lib/upload";
 
 

@@ -1,7 +1,7 @@
 import {AddTreesRequestParams, useAddTrees} from "../../utils/woodland";
 import React from "react";
 import {Button, Form, Input, message, Modal, Space} from "antd";
-import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
+import {MinusCircleOutlined, PlusOutlined} from '@ant-design/icons';
 
 
 export const TreesAddModal = ({

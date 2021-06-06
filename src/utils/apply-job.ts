@@ -6,6 +6,7 @@ import {cleanObject} from "./index";
 import {useNoOpsConfig} from "./use-optimistic-options";
 import {OssFile} from "../type/oss-file";
 import {message} from "antd";
+
 const appUrl = process.env.REACT_APP_URL;
 const ossUrl = process.env.REACT_APP_OSS_URL;
 

@@ -8,7 +8,7 @@ import {
     TablePaginationConfig,
 } from "antd/lib/table/interface";
 import {Button, Input, message, Popconfirm, Space, Table} from "antd";
-import { SearchOutlined } from "@ant-design/icons";
+import {SearchOutlined} from "@ant-design/icons";
 import {SingleFieldSorter} from "../../../../type/request";
 import {GetUsersRequestParams, useChangeUserState, useUsers} from "../../../../utils/user";
 import {useState} from "react";

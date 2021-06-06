@@ -1,4 +1,4 @@
-import { ErrorBoundary } from "./component/error-boundary";
+import {ErrorBoundary} from "./component/error-boundary";
 import {FullPageErrorFallback} from "./component/lib";
 import {Navigate, Route, Routes} from "react-router";
 import {BackPage} from "./page/back";

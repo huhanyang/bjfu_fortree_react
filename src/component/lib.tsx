@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import React from "react";
-import { Button, Spin, Typography } from "antd";
+import {Button, Spin, Typography} from "antd";
 
 const FullPage = styled.div`
   height: 100vh;

@@ -1,4 +1,4 @@
-import { Routes, Route, Navigate } from "react-router";
+import {Navigate, Route, Routes} from "react-router";
 import {Login} from "./login";
 import {Register} from "./register";
 

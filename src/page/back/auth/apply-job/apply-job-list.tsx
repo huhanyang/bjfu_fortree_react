@@ -1,11 +1,6 @@
 import {GetApplyJobsRequestParams, useApplyJobs} from "../../../../utils/apply-job";
 import {useState} from "react";
-import {
-    FilterValue,
-    SorterResult,
-    TableCurrentDataSource,
-    TablePaginationConfig
-} from "antd/lib/table/interface";
+import {FilterValue, SorterResult, TableCurrentDataSource, TablePaginationConfig} from "antd/lib/table/interface";
 import {SingleFieldSorter} from "../../../../type/request";
 import {Button, Table} from "antd";
 import {

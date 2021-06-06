@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { Button, Card, Row, Col } from "antd";
+import {Button, Card, Col, Row} from "antd";
 import {UnAuthRoutes} from "./unauth-routes";
 import {Link} from "react-router-dom";
 
