@@ -15,6 +15,8 @@ import {SingleFieldSorter} from "../../type/request";
 
 export const TreeList = ({woodlandId, recordId}:{woodlandId: number, recordId: number}) => {
 
+    // todo recordId 变更 trees没有动作
+
     const [requestParams, setRequestParams] = useState<GetTreesRequestParams>({
         recordId,
         pagination: {

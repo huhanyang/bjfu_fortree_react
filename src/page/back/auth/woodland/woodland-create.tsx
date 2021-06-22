@@ -1,5 +1,5 @@
 import {Button, Form, Input, message, Modal, Select} from "antd";
-import {useState} from "react";
+import React, {useState} from "react";
 import {Point} from "../../../../type/point";
 import {Map, Marker} from 'react-bmapgl';
 import {CreateWoodlandRequestParams, useCreateWoodland} from "../../../../utils/woodland";
@@ -203,6 +203,12 @@ export const WoodlandCreate = () => {
                     >
                         <Input type="number" style={{ width: '34%' }}  placeholder="输入宽度" suffix="米" />
                     </Form.Item>
+                </Form.Item>
+                <Form.Item
+                    name="addition"
+                    label="附加信息"
+                >
+                    <Input placeholder="请输入林地附加信息" maxLength={512} />
                 </Form.Item>
                 <Form.Item>
                     <Button type="primary" htmlType="submit" loading={isCreateWoodlandLoading} >
