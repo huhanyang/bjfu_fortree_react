@@ -1,6 +1,7 @@
 import React from "react";
 import {AddRecordRequestParams, useAddRecord} from "../../utils/woodland";
-import {Button, DatePicker, Form, Input, message, Modal, Switch} from "antd";
+import {Button, DatePicker, Form, Input, message, Modal, Select, Switch} from "antd";
+import {getRecordTypeInfo, RecordTypes} from "../../type/record";
 
 
 export const RecordAddModal = ({
@@ -86,6 +87,17 @@ export const RecordAddModal = ({
                     label="树木是否编号"
                 >
                     <Switch defaultChecked={true} />
+                </Form.Item>
+                <Form.Item
+                    name="type"
+                    label="类型"
+                    rules={[
+                        { required: true, message: '请选择记录类型!' }
+                    ]}
+                >
+                    <Select>
+                        {RecordTypes.map(type => <Select.Option value={type}>{getRecordTypeInfo(type)}</Select.Option>)}
+                    </Select>
                 </Form.Item>
                 <Form.Item
                     name="addition"

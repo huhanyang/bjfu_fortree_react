@@ -3,7 +3,7 @@ import {Button, Descriptions, Divider, message, Popconfirm, Select, Switch} from
 import {getWoodlandShapeInfo, Woodland} from "../../type/woodland";
 import {UserPopover} from "../user/user-popover";
 import React, {useEffect, useState} from "react";
-import {Record} from "../../type/record";
+import {getRecordTypeInfo, Record} from "../../type/record";
 import {TreeList} from "../tree/tree-list";
 import {WoodlandEditModal} from "./woodland-edit-modal";
 import {RecordAddModal} from "../record/record-add-modal";
@@ -100,6 +100,7 @@ export const WoodlandInfo = ({id}:{id: number}) => {
                 <Descriptions.Item label="最小树高(cm)">{recordInfo.minHeight}</Descriptions.Item>
                 <Descriptions.Item label="平均树高(cm)">{recordInfo.meanHeight}</Descriptions.Item>
                 <Descriptions.Item label="测量时间">{new Date(recordInfo.measureTime).toLocaleString()}</Descriptions.Item>
+                <Descriptions.Item label="记录类型">{getRecordTypeInfo(recordInfo.type)}</Descriptions.Item>
                 <Descriptions.Item label="附加信息">{recordInfo.addition}</Descriptions.Item>
             </Descriptions>
         );

@@ -1,7 +1,7 @@
 import React from "react";
 import {EditRecordRequestParams, useEditRecord} from "../../utils/woodland";
-import {Button, DatePicker, Form, Input, message, Modal, Switch} from "antd";
-import {Record} from "../../type/record";
+import {Button, DatePicker, Form, Input, message, Modal, Select, Switch} from "antd";
+import {getRecordTypeInfo, Record, RecordTypes} from "../../type/record";
 import moment from "moment";
 
 
@@ -88,6 +88,17 @@ export const RecordEditModal = ({
                     label="树木是否编号"
                 >
                     <Switch defaultChecked={record.isTreeWithId} />
+                </Form.Item>
+                <Form.Item
+                    name="type"
+                    label="类型"
+                    rules={[
+                        { required: true, message: '请选择记录类型!' }
+                    ]}
+                >
+                    <Select>
+                        {RecordTypes.map(type => <Select.Option value={type}>{getRecordTypeInfo(type)}</Select.Option>)}
+                    </Select>
                 </Form.Item>
                 <Form.Item
                     name="addition"

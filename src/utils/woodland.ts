@@ -8,6 +8,7 @@ import {Tree} from "../type/tree";
 import {Point} from "../type/point";
 import {ApplyJob} from "../type/apply-job";
 import {message} from "antd";
+import {RecordType} from "../type/record";
 
 export interface CreateWoodlandRequestParams {
     name: string;
@@ -47,6 +48,7 @@ export interface AddRecordRequestParams {
     measureTime: string;
     addition?: string;
     isTreeWithId: boolean;
+    type: RecordType;
 }
 
 export const useAddRecord = () => {
@@ -214,6 +216,7 @@ export interface EditRecordRequestParams {
     meanHeight: number;
     measureTime: string;
     addition?: string;
+    type: RecordType;
 }
 
 export const useEditRecord = () => {
