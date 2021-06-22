@@ -69,6 +69,21 @@ export const Register = () => {
                 >
                     <Input placeholder={"组织"} type="text" maxLength={32} />
                 </Form.Item>
+                <Form.Item
+                    name={"phone"}
+                    rules={[{ required: true, message: "请输入手机号码" }]}
+                >
+                    <Input placeholder={"手机"} type="text" maxLength={11} />
+                </Form.Item>
+                <Form.Item
+                    name={"email"}
+                    rules={[{
+                        type: 'email',
+                        message: '请输入正确的邮箱',
+                    },{ required: true, message: "请输入邮箱" }]}
+                >
+                    <Input placeholder={"邮箱"} type="text" maxLength={32} />
+                </Form.Item>
 
                 <Form.Item>
                     <LongButton loading={isLoading} htmlType={"submit"} type={"primary"}>

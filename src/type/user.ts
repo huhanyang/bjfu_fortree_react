@@ -19,6 +19,8 @@ export interface User {
     woodlands?: Woodland[];
     records?: Record[];
     applyJobs?: ApplyJob[];
+    phone: string;
+    email: string;
     token?: string;
 }
 

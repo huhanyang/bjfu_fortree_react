@@ -173,6 +173,16 @@ export const UserList = () => {
                     filterDropdown={filterDropdown}
                 />
                 <Table.Column<User>
+                    title="电话"
+                    key="phone"
+                    dataIndex="phone"
+                />
+                <Table.Column<User>
+                    title="邮箱"
+                    key="email"
+                    dataIndex="email"
+                />
+                <Table.Column<User>
                     title="注册时间"
                     key="createdTime"
                     dataIndex="createdTime"

@@ -47,6 +47,8 @@ export const UserInfo = ({account}:{account: string}) => {
                     <Descriptions.Item label="账号">{user?.account}</Descriptions.Item>
                     <Descriptions.Item label="姓名">{user?.account}</Descriptions.Item>
                     <Descriptions.Item label="组织">{user?.name}</Descriptions.Item>
+                    <Descriptions.Item label="手机">{user?.phone}</Descriptions.Item>
+                    <Descriptions.Item label="邮箱">{user?.email}</Descriptions.Item>
                     <Descriptions.Item label="类型">{user?getUserTypeInfo(user.type):""}</Descriptions.Item>
                     <Descriptions.Item label="状态">{user?getUserStateInfo(user.state):""}</Descriptions.Item>
                     <Descriptions.Item label="注册时间">{user?new Date(user?.createdTime).toLocaleString():""}</Descriptions.Item>
