@@ -48,7 +48,7 @@ export const AdminSider = ({
                 <SubMenu key="sub2" icon={<GlobalOutlined />} title="林地">
                     <Menu.Item key="3"><Link to="/back/woodland/map">林地地图</Link></Menu.Item>
                     <Menu.Item key="4"><Link to="/back/woodland/list">林地列表</Link></Menu.Item>
-                    <Menu.Item key="5"><Link to="/back/woodland/list-created">创建的林地</Link></Menu.Item>
+                    <Menu.Item key="5"><Link to="/back/woodland/list-created">我的林地</Link></Menu.Item>
                     <Menu.Item key="6"><Link to="/back/woodland/create">创建林地</Link></Menu.Item>
                 </SubMenu>
                 <SubMenu key="sub3" icon={<NotificationOutlined />} title="申请">
