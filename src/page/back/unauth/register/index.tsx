@@ -14,7 +14,7 @@ export const Register = () => {
 
     const handleSubmit = async (values: RegisterRequestParams) => {
         try {
-            await run(register(values)).then(()=>{navigate("/back", { replace: true });});
+            await run(register(values)).then(()=>{navigate("/front", { replace: true });});
         } catch (e) {
             message.error(e.message);
         }

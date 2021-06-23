@@ -13,7 +13,9 @@ const handleUserResponse = (result: Result<User>) => {
         message.error(result.msg);
         return null;
     }
-    window.localStorage.setItem(localStorageKey, result.object.token || "");
+    if(result.object.token) {
+        window.localStorage.setItem(localStorageKey, result.object.token);
+    }
     return result.object;
 };
 
@@ -54,6 +56,7 @@ export const register = (data: RegisterRequestParams) => {
         body: JSON.stringify(data),
     }).then(async (response) => {
         if (response.ok) {
+            message.warn("请等待管理员审批")
             return handleUserResponse(await response.json());
         } else {
             return Promise.reject(await response.json());

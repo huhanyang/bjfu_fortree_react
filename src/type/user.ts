@@ -4,7 +4,7 @@ import {Authority} from "./authority";
 import {ApplyJob} from "./apply-job";
 
 export type UserType = "USER" | "ADMIN";
-export type UserState = "ACTIVE" | "BANNED";
+export type UserState = "ACTIVE" | "BANNED" | "UNACTIVE";
 
 export interface User {
     id: number;
@@ -41,6 +41,8 @@ export function getUserStateInfo(state: UserState) {
             return '活跃';
         case 'BANNED':
             return '封禁';
+        case "UNACTIVE":
+            return '未激活';
         default:
             return state;
     }

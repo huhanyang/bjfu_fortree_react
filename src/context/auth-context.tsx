@@ -45,7 +45,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     const queryClient = useQueryClient();
 
     const login = (params: LoginRequestParams) => auth.login(params).then(setUser);
-    const register = (params: RegisterRequestParams) => auth.register(params).then(setUser);
+    const register = (params: RegisterRequestParams) => auth.register(params).then(()=>{});
     const logout = () => auth.logout().then(() => {
         setUser(null);
         queryClient.clear();
