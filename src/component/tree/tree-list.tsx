@@ -27,7 +27,7 @@ export const TreeList = ({woodlandId, recordId}:{woodlandId: number, recordId: n
 
     const {user: me} = useAuth();
     const { data: woodland } = useWoodland(woodlandId);
-    const { data: trees, isLoading: isTreesLoading } = useTrees(requestParams);
+    const { data: trees, isLoading: isTreesLoading } = useTrees({...requestParams, recordId});
     const [selectedTreeIds, setSelectedTreeIds] = useState<number[]>([]);
     const {mutateAsync: deleteTrees, isLoading: isDeleteTreesLoading} = useDeleteTrees();
 

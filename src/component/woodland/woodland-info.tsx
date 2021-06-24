@@ -136,8 +136,11 @@ export const WoodlandInfo = ({id}:{id: number}) => {
                         记录测量时间:
                         <Select
                             defaultValue={0}
-                            // @ts-ignore
-                            onChange={(value) => setRecord(woodland.records[value])}
+                            onChange={(value) => {
+                                // @ts-ignore
+                                setRecord(woodland.records[value]);
+
+                            }}
                         >
                             {
                                 // @ts-ignore
