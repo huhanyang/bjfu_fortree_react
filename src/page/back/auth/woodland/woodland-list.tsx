@@ -112,7 +112,7 @@ export const WoodlandList = () => {
                 <Button type="primary" onClick={async () => {
                     try {
                         await exportWoodlands({ids: selectedWoodlandIds})
-                            .then(()=>{navigate("/back/apply-job/list", { replace: true });});
+                            .then(()=>{navigate("/back/apply-job/list-created", { replace: true });});
                     } catch (e) {
                         message.error(e.message);
                     }
