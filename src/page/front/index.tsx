@@ -1,5 +1,5 @@
 import {Link} from "react-router-dom";
-import {Button, Layout, Menu} from 'antd';
+import {Layout, Menu} from 'antd';
 import React from "react";
 import {FrontRoutes} from "./front-routes";
 import styled from "@emotion/styled";

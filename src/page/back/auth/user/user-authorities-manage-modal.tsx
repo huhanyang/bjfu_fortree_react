@@ -19,6 +19,7 @@ export const UserAuthoritiesManageModal = ({
 
     return (
         <Modal
+            width="90%"
             title="管理用户权限"
             footer={null}
             visible={visible}
@@ -27,7 +28,10 @@ export const UserAuthoritiesManageModal = ({
             }}
         >
             <Transfer<{key: AuthorityType}>
-                style={{width: "100%"}}
+                listStyle={{
+                    width: "100%",
+                    height: "100%",
+                }}
                 disabled={isUserLoading}
                 titles={['未拥有的', '拥有的']}
                 dataSource={AuthorityTypes.map(type=>{
