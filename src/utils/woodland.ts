@@ -259,6 +259,27 @@ export const useAllWoodlands = () => {
     );
 }
 
+export interface GetAllWoodlandsRequestParams {
+    name?: string;
+    country?: string;
+    province?: string;
+    city?: string;
+    area?: number;
+    areaDirection?: "MIN"|"MAX";
+    treeCount?: number;
+    treeCountDirection?: "MIN"|"MAX";
+    treeMeanHeight?: number;
+    treeMeanHeightDirection?: "MIN"|"MAX";
+}
+
+export const useAllWoodlandsByFilter = (params: GetAllWoodlandsRequestParams) => {
+    const client = useHttp();
+    return useQuery<Woodland[]>(
+        ["woodland", "all-woodlands-by-filter", params],
+        () => client(`woodland/getAllWoodlands`, {method: "POST", data: params})
+    );
+}
+
 export const useWoodlandsByCreator = (params: Partial<GetWoodlandsRequestParams>) => {
     const client = useHttp();
     return useQuery<Page<Woodland>>(
