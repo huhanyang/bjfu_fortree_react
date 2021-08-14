@@ -100,6 +100,36 @@ export const RecordEditModal = ({
                         {RecordTypes.map(type => <Select.Option value={type}>{getRecordTypeInfo(type)}</Select.Option>)}
                     </Select>
                 </Form.Item>
+                <Form.Item name="measureType" label="测量方式" rules={[
+                    { required: true, message: '请输入测量方式!' }
+                ]}>
+                    <Input maxLength={16} />
+                </Form.Item>
+                <Form.Item name="canopyDensity" label="郁闭度" rules={[
+                    { required: true, message: '请输入郁闭度!' }
+                ]}>
+                    <Input type="number" suffix="%" max={100} min={0}/>
+                </Form.Item>
+                <Form.Item name="dominantSpecies" label="优势树种" rules={[
+                    { required: true, message: '请输入优势树种!' }
+                ]}>
+                    <Input maxLength={32} />
+                </Form.Item>
+                <Form.Item name="ageGroup" label="龄组">
+                    <Input maxLength={64} />
+                </Form.Item>
+                <Form.Item name="slope" label="坡度">
+                    <Input maxLength={64} />
+                </Form.Item>
+                <Form.Item name="aspect" label="坡向">
+                    <Input maxLength={64} />
+                </Form.Item>
+                <Form.Item name="origin" label="起源">
+                    <Input maxLength={64} />
+                </Form.Item>
+                <Form.Item name="speciesComposition" label="树种组成">
+                    <Input maxLength={256} />
+                </Form.Item>
                 <Form.Item
                     name="addition"
                     label="附加信息"

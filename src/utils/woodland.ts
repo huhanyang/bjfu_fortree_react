@@ -49,6 +49,14 @@ export interface AddRecordRequestParams {
     addition?: string;
     isTreeWithId: boolean;
     type: RecordType;
+    measureType: string;
+    canopyDensity: number;
+    dominantSpecies: string;
+    ageGroup?: string
+    slope?: string
+    aspect?: string
+    origin?: string
+    speciesComposition?: string
 }
 
 export const useAddRecord = () => {
@@ -71,8 +79,10 @@ export interface AddTreeParams {
     treeId?: string;
     species: string;
     height: number;
-    dbh: number;
-    crownWidth: number;
+    dbh?: number;
+    crownWidth?: number;
+    subbranchHeight?: number;
+    absolutePosition?: Point
     addition?: string;
 }
 
@@ -216,7 +226,14 @@ export interface EditRecordRequestParams {
     meanHeight: number;
     measureTime: string;
     addition?: string;
-    type: RecordType;
+    type: RecordType;measureType: string;
+    canopyDensity: number;
+    dominantSpecies: string;
+    ageGroup?: string
+    slope?: string
+    aspect?: string
+    origin?: string
+    speciesComposition?: string
 }
 
 export const useEditRecord = () => {

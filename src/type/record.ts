@@ -29,5 +29,13 @@ export interface Record {
     addition?: string;
     isTreeWithId: boolean;
     type: RecordType;
+    measureType: string;
+    canopyDensity: number;
+    dominantSpecies: string;
+    ageGroup?: string
+    slope?: string
+    aspect?: string
+    origin?: string
+    speciesComposition?: string
     trees?: Tree[];
 }

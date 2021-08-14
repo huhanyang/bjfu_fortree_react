@@ -184,6 +184,21 @@ export const TreeList = ({woodlandId, recordId}:{woodlandId: number, recordId: n
                     sorter={{ multiple: 5 }}
                 />
                 <Table.Column<Tree>
+                    title="枝下高(cm)"
+                    key="subbranchHeight"
+                    dataIndex="subbranchHeight"
+                />
+                <Table.Column<Tree>
+                    title="经度"
+                    key="absolutePosition"
+                    dataIndex={["absolutePosition", "longitude"]}
+                />
+                <Table.Column<Tree>
+                    title="纬度"
+                    key="absolutePosition"
+                    dataIndex={["absolutePosition", "latitude"]}
+                />
+                <Table.Column<Tree>
                     title="附加信息"
                     key="addition"
                     dataIndex="addition"

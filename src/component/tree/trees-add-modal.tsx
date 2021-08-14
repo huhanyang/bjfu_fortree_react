@@ -32,7 +32,7 @@ export const TreesAddModal = ({
             onCancel={() => {
                 setVisible(false);
             }}
-            width="70%"
+            width="100%"
         >
             <Form
                 onFinish={handleSubmit}
@@ -74,9 +74,6 @@ export const TreesAddModal = ({
                                             {...field}
                                             name={[field.name, 'dbh']}
                                             fieldKey={[field.fieldKey, 'dbh']}
-                                            rules={[
-                                                { required: true, message: '请输入胸径!' }
-                                            ]}
                                         >
                                             <Input type="number" placeholder="输入胸径" suffix="厘米" />
                                         </Form.Item>
@@ -84,11 +81,29 @@ export const TreesAddModal = ({
                                             {...field}
                                             name={[field.name, 'crownWidth']}
                                             fieldKey={[field.fieldKey, 'crownWidth']}
-                                            rules={[
-                                                { required: true, message: '请输入冠幅!' }
-                                            ]}
                                         >
                                             <Input type="number" placeholder="输入冠幅" suffix="厘米" />
+                                        </Form.Item>
+                                        <Form.Item
+                                            {...field}
+                                            name={[field.name, 'subbranchHeight']}
+                                            fieldKey={[field.fieldKey, 'subbranchHeight']}
+                                        >
+                                            <Input type="number" placeholder="输入枝下高" suffix="厘米" />
+                                        </Form.Item>
+                                        <Form.Item
+                                            {...field}
+                                            name={[field.name, 'absolutePosition', 'longitude']}
+                                            fieldKey={[field.fieldKey, 'absolutePositionLongitude']}
+                                        >
+                                            <Input type="number" placeholder="输入经度"/>
+                                        </Form.Item>
+                                        <Form.Item
+                                            {...field}
+                                            name={[field.name, 'absolutePosition', 'latitude']}
+                                            fieldKey={[field.fieldKey, 'absolutePositionLatitude']}
+                                        >
+                                            <Input type="number" placeholder="输入纬度"/>
                                         </Form.Item>
                                         <MinusCircleOutlined onClick={() => remove(field.name)} />
                                     </Space>

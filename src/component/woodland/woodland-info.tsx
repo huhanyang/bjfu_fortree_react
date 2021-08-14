@@ -81,6 +81,7 @@ export const WoodlandInfo = ({id}:{id: number}) => {
                     onConfirm={async () => {
                         try {
                             await deleteRecord(recordInfo.id);
+                            setRecord(undefined);
                         } catch (e) {
                             message.error(e.message);
                         }
@@ -101,7 +102,15 @@ export const WoodlandInfo = ({id}:{id: number}) => {
                 <Descriptions.Item label="平均树高(cm)">{recordInfo.meanHeight}</Descriptions.Item>
                 <Descriptions.Item label="测量时间">{new Date(recordInfo.measureTime).toLocaleString()}</Descriptions.Item>
                 <Descriptions.Item label="记录类型">{getRecordTypeInfo(recordInfo.type)}</Descriptions.Item>
-                <Descriptions.Item label="附加信息">{recordInfo.addition}</Descriptions.Item>
+                <Descriptions.Item label="树高测量方式">{recordInfo.measureType}</Descriptions.Item>
+                <Descriptions.Item label="郁闭度">{recordInfo.canopyDensity}+{"%"}</Descriptions.Item>
+                <Descriptions.Item label="优势树种">{recordInfo.dominantSpecies}</Descriptions.Item>
+                {recordInfo.ageGroup?<Descriptions.Item label="龄组">{recordInfo.ageGroup}</Descriptions.Item>:<></>}
+                {recordInfo.slope?<Descriptions.Item label="坡度">{recordInfo.slope}</Descriptions.Item>:<></>}
+                {recordInfo.aspect?<Descriptions.Item label="坡向">{recordInfo.aspect}</Descriptions.Item>:<></>}
+                {recordInfo.origin?<Descriptions.Item label="起源">{recordInfo.origin}</Descriptions.Item>:<></>}
+                {recordInfo.speciesComposition?<Descriptions.Item label="树种组成">{recordInfo.speciesComposition}</Descriptions.Item>:<></>}
+                {recordInfo.addition?<Descriptions.Item label="附加信息">{recordInfo.addition}</Descriptions.Item>:<></>}
             </Descriptions>
         );
     }
@@ -139,7 +148,6 @@ export const WoodlandInfo = ({id}:{id: number}) => {
                             onChange={(value) => {
                                 // @ts-ignore
                                 setRecord(woodland.records[value]);
-
                             }}
                         >
                             {
