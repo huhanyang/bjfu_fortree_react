@@ -103,7 +103,7 @@ export const WoodlandInfo = ({id}:{id: number}) => {
                 <Descriptions.Item label="测量时间">{new Date(recordInfo.measureTime).toLocaleString()}</Descriptions.Item>
                 <Descriptions.Item label="记录类型">{getRecordTypeInfo(recordInfo.type)}</Descriptions.Item>
                 <Descriptions.Item label="树高测量方式">{recordInfo.measureType}</Descriptions.Item>
-                <Descriptions.Item label="郁闭度">{recordInfo.canopyDensity}+{"%"}</Descriptions.Item>
+                <Descriptions.Item label="郁闭度">{recordInfo.canopyDensity+"%"}</Descriptions.Item>
                 <Descriptions.Item label="优势树种">{recordInfo.dominantSpecies}</Descriptions.Item>
                 {recordInfo.ageGroup?<Descriptions.Item label="龄组">{recordInfo.ageGroup}</Descriptions.Item>:<></>}
                 {recordInfo.slope?<Descriptions.Item label="坡度">{recordInfo.slope}</Descriptions.Item>:<></>}

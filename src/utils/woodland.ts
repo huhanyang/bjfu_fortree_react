@@ -9,6 +9,7 @@ import {Point} from "../type/point";
 import {ApplyJob} from "../type/apply-job";
 import {message} from "antd";
 import {RecordType} from "../type/record";
+import {getToken} from "../auth-provider";
 
 export interface CreateWoodlandRequestParams {
     name: string;
@@ -105,6 +106,13 @@ export const useAddTrees = () => {
             }),
         useNoOpsConfig(["woodland"])
     );
+}
+
+const apiUrl = process.env.REACT_APP_API_URL;
+export const getAddTreesExcelTemplate = () => {
+    const link = document.createElement('a');
+    link.href = `${apiUrl}/woodland/getAddTreesExcelTemplate?token=${getToken()}`;
+    link.click();
 }
 
 export interface AddTreesByExcelRequestParams {

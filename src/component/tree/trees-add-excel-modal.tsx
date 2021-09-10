@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {useAddTreesByExcel} from "../../utils/woodland";
+import {getAddTreesExcelTemplate, useAddTreesByExcel} from "../../utils/woodland";
 import {Button, message, Modal, Upload} from "antd";
 import {UploadOutlined} from '@ant-design/icons';
 import {RcFile} from "antd/lib/upload";
@@ -16,6 +16,7 @@ export const TreesAddExcelModal = ({
 }) => {
     const [file, setFile] = useState<RcFile|undefined>();
     const {mutateAsync: addTrees, isLoading: isAddTreesLoading} = useAddTreesByExcel();
+
     const submit = async () => {
         if(file) {
             try {
@@ -38,6 +39,7 @@ export const TreesAddExcelModal = ({
                 setVisible(false);
             }}
         >
+            <Button onClick={()=>{getAddTreesExcelTemplate();}}>下载模板</Button>
             <Upload maxCount={1} beforeUpload={file => {
                 setFile(file);
                 return false;
