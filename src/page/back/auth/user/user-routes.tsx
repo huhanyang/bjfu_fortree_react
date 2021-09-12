@@ -10,8 +10,8 @@ export const UserRoutes = () => {
     const AdminRoutes = () => {
         return (
             <Routes>
-                <Route path="/info/:account" element={<UserInfo />} />
-                <Route path="/list" element={<UserList />} />
+                <Route path="/info/:account" element={<UserInfo/>}/>
+                <Route path="/list" element={<UserList/>}/>
             </Routes>
         );
     }
@@ -19,14 +19,14 @@ export const UserRoutes = () => {
     const UserRoutes = () => {
         return (
             <Routes>
-                <Route path="/info/:account" element={<UserInfo />} />
+                <Route path="/info/:account" element={<UserInfo/>}/>
             </Routes>
         );
     }
 
     return (
         <>
-            {me?.type==="ADMIN"?<AdminRoutes/>:<UserRoutes/>}
+            {me?.type === "ADMIN" ? <AdminRoutes/> : <UserRoutes/>}
         </>
     );
 }

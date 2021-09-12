@@ -14,14 +14,16 @@ export const TreesAddExcelModal = ({
     visible: boolean;
     setVisible: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
-    const [file, setFile] = useState<RcFile|undefined>();
+    const [file, setFile] = useState<RcFile | undefined>();
     const {mutateAsync: addTrees, isLoading: isAddTreesLoading} = useAddTreesByExcel();
 
     const submit = async () => {
-        if(file) {
+        if (file) {
             try {
                 await addTrees({file, fileName: file.name, recordId})
-                    .then(()=>{setVisible(false);});
+                    .then(() => {
+                        setVisible(false);
+                    });
             } catch (e) {
                 message.error(e.message);
             }
@@ -39,14 +41,18 @@ export const TreesAddExcelModal = ({
                 setVisible(false);
             }}
         >
-            <Button onClick={()=>{getAddTreesExcelTemplate();}}>下载模板</Button>
+            <Button onClick={() => {
+                getAddTreesExcelTemplate();
+            }}>下载模板</Button>
             <Upload maxCount={1} beforeUpload={file => {
                 setFile(file);
                 return false;
             }}>
-                <Button icon={<UploadOutlined />}>选择文件</Button>
+                <Button icon={<UploadOutlined/>}>选择文件</Button>
             </Upload>
-            <Button onClick={() => {submit();}} disabled={!file} loading={isAddTreesLoading}>提交</Button>
+            <Button onClick={() => {
+                submit();
+            }} disabled={!file} loading={isAddTreesLoading}>提交</Button>
         </Modal>
     );
 }

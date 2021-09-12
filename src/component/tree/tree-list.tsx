@@ -13,7 +13,7 @@ import {
 } from "antd/lib/table/interface";
 import {SingleFieldSorter} from "../../type/request";
 
-export const TreeList = ({woodlandId, recordId}:{woodlandId: number, recordId: number}) => {
+export const TreeList = ({woodlandId, recordId}: { woodlandId: number, recordId: number }) => {
 
     // todo recordId 变更 trees没有动作
 
@@ -26,15 +26,15 @@ export const TreeList = ({woodlandId, recordId}:{woodlandId: number, recordId: n
     });
 
     const {user: me} = useAuth();
-    const { data: woodland } = useWoodland(woodlandId);
-    const { data: trees, isLoading: isTreesLoading } = useTrees({...requestParams, recordId});
+    const {data: woodland} = useWoodland(woodlandId);
+    const {data: trees, isLoading: isTreesLoading} = useTrees({...requestParams, recordId});
     const [selectedTreeIds, setSelectedTreeIds] = useState<number[]>([]);
     const {mutateAsync: deleteTrees, isLoading: isDeleteTreesLoading} = useDeleteTrees();
 
 
     const deleteTreesRequest = async () => {
         try {
-            await deleteTrees({recordId, treeIds: selectedTreeIds}).then(()=>{
+            await deleteTrees({recordId, treeIds: selectedTreeIds}).then(() => {
                 setSelectedTreeIds([]);
             });
         } catch (e) {
@@ -60,8 +60,8 @@ export const TreeList = ({woodlandId, recordId}:{woodlandId: number, recordId: n
         setRequestParams({
             ...requestParams,
             ...filters,
-            treeId:filters.treeId?String(filters.treeId[0]):"",
-            species:filters.species?String(filters.species[0]):"",
+            treeId: filters.treeId ? String(filters.treeId[0]) : "",
+            species: filters.species ? String(filters.species[0]) : "",
             pagination: pagination,
             sorter: newSorter,
         });
@@ -79,22 +79,22 @@ export const TreeList = ({woodlandId, recordId}:{woodlandId: number, recordId: n
         confirm: (param?: FilterConfirmProps) => void;
         clearFilters?: () => void;
     }) => (
-        <div style={{ padding: 8 }}>
+        <div style={{padding: 8}}>
             <Input
                 value={selectedKeys[0]}
                 onChange={(e) =>
                     setSelectedKeys(e.target.value ? [e.target.value] : [])
                 }
                 onPressEnter={() => confirm()}
-                style={{ width: 188, marginBottom: 8, display: "block" }}
+                style={{width: 188, marginBottom: 8, display: "block"}}
             />
             <Space>
                 <Button
                     type="primary"
                     onClick={() => confirm()}
-                    icon={<SearchOutlined />}
+                    icon={<SearchOutlined/>}
                     size="small"
-                    style={{ width: 90 }}
+                    style={{width: 90}}
                 >
                     搜索
                 </Button>
@@ -105,7 +105,7 @@ export const TreeList = ({woodlandId, recordId}:{woodlandId: number, recordId: n
                         }
                     }}
                     size="small"
-                    style={{ width: 90 }}
+                    style={{width: 90}}
                 >
                     重置
                 </Button>
@@ -116,11 +116,12 @@ export const TreeList = ({woodlandId, recordId}:{woodlandId: number, recordId: n
     const hasSelected = selectedTreeIds.length > 0;
     return (
         <>
-            <div style={{ marginBottom: 16 }}>
-                <Button type="primary" onClick={deleteTreesRequest} disabled={!hasSelected} loading={isDeleteTreesLoading}>
+            <div style={{marginBottom: 16}}>
+                <Button type="primary" onClick={deleteTreesRequest} disabled={!hasSelected}
+                        loading={isDeleteTreesLoading}>
                     删除
                 </Button>
-                <span style={{ marginLeft: 8 }}>{hasSelected ? `选中了 ${selectedTreeIds.length} 棵树木` : ''}</span>
+                <span style={{marginLeft: 8}}>{hasSelected ? `选中了 ${selectedTreeIds.length} 棵树木` : ''}</span>
             </div>
             <Table<Tree>
                 rowKey="id"
@@ -130,25 +131,29 @@ export const TreeList = ({woodlandId, recordId}:{woodlandId: number, recordId: n
                 onChange={handleTableChange}
                 rowSelection={
                     woodland?.creator?.account === me?.account ||
-                    woodland?.records?.find((value)=>{return value.creator?.account === me?.account;}) ||
-                    me?.authorities?.find((value)=>{return value.type === "DELETE_TREES_IN_ANY_RECORD";})?{
+                    woodland?.records?.find((value) => {
+                        return value.creator?.account === me?.account;
+                    }) ||
+                    me?.authorities?.find((value) => {
+                        return value.type === "DELETE_TREES_IN_ANY_RECORD";
+                    }) ? {
                         selectedRowKeys: selectedTreeIds,
                         onChange: (selectedRowKeys) => {
-                            setSelectedTreeIds(selectedRowKeys.map(key=>Number(key)));
+                            setSelectedTreeIds(selectedRowKeys.map(key => Number(key)));
                         }
-                    }:{}
+                    } : {}
                 }
                 bordered
-                scroll={{ x: "100%" }}
+                scroll={{x: "100%"}}
             >
                 <Table.Column<Tree>
                     title="编号"
                     key="treeId"
                     dataIndex="treeId"
-                    sorter={{ multiple: 1 }}
+                    sorter={{multiple: 1}}
                     filterIcon={(filtered: boolean) => (
                         <SearchOutlined
-                            style={{ color: filtered ? "#1890ff" : undefined }}
+                            style={{color: filtered ? "#1890ff" : undefined}}
                         />
                     )}
                     filterDropdown={filterDropdown}
@@ -157,10 +162,10 @@ export const TreeList = ({woodlandId, recordId}:{woodlandId: number, recordId: n
                     title="树种"
                     key="species"
                     dataIndex="species"
-                    sorter={{ multiple: 2 }}
+                    sorter={{multiple: 2}}
                     filterIcon={(filtered: boolean) => (
                         <SearchOutlined
-                            style={{ color: filtered ? "#1890ff" : undefined }}
+                            style={{color: filtered ? "#1890ff" : undefined}}
                         />
                     )}
                     filterDropdown={filterDropdown}
@@ -169,19 +174,19 @@ export const TreeList = ({woodlandId, recordId}:{woodlandId: number, recordId: n
                     title="高度(cm)"
                     key="height"
                     dataIndex="height"
-                    sorter={{ multiple: 3 }}
+                    sorter={{multiple: 3}}
                 />
                 <Table.Column<Tree>
                     title="胸径(cm)"
                     key="dbh"
                     dataIndex="dbh"
-                    sorter={{ multiple: 4 }}
+                    sorter={{multiple: 4}}
                 />
                 <Table.Column<Tree>
                     title="冠幅(cm)"
                     key="crownWidth"
                     dataIndex="crownWidth"
-                    sorter={{ multiple: 5 }}
+                    sorter={{multiple: 5}}
                 />
                 <Table.Column<Tree>
                     title="枝下高(cm)"

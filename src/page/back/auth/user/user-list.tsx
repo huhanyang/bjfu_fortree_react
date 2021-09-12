@@ -25,7 +25,7 @@ export const UserList = () => {
             pageSize: 10,
         },
     } as GetUsersRequestParams);
-    const { user: me } = useAuth();
+    const {user: me} = useAuth();
     const {mutateAsync: changeUserState, isLoading: isChangeUserStateLoading} = useChangeUserState();
     const {data: users, isLoading: isUsersLoading} = useUsers(requestParams);
     const [authorityManageModalVisible, setAuthorityManageModalVisible] = useState(false);
@@ -49,9 +49,9 @@ export const UserList = () => {
         setRequestParams({
             ...requestParams,
             ...filters,
-            account:filters.account?String(filters.account[0]):"",
-            name:filters.name?String(filters.name[0]):"",
-            organization:filters.organization?String(filters.organization[0]):"",
+            account: filters.account ? String(filters.account[0]) : "",
+            name: filters.name ? String(filters.name[0]) : "",
+            organization: filters.organization ? String(filters.organization[0]) : "",
             pagination: pagination,
             sorter: newSorter,
         });
@@ -69,22 +69,22 @@ export const UserList = () => {
         confirm: (param?: FilterConfirmProps) => void;
         clearFilters?: () => void;
     }) => (
-        <div style={{ padding: 8 }}>
+        <div style={{padding: 8}}>
             <Input
                 value={selectedKeys[0]}
                 onChange={(e) =>
                     setSelectedKeys(e.target.value ? [e.target.value] : [])
                 }
                 onPressEnter={() => confirm()}
-                style={{ width: 188, marginBottom: 8, display: "block" }}
+                style={{width: 188, marginBottom: 8, display: "block"}}
             />
             <Space>
                 <Button
                     type="primary"
                     onClick={() => confirm()}
-                    icon={<SearchOutlined />}
+                    icon={<SearchOutlined/>}
                     size="small"
-                    style={{ width: 90 }}
+                    style={{width: 90}}
                 >
                     搜索
                 </Button>
@@ -95,7 +95,7 @@ export const UserList = () => {
                         }
                     }}
                     size="small"
-                    style={{ width: 90 }}
+                    style={{width: 90}}
                 >
                     重置
                 </Button>
@@ -112,16 +112,16 @@ export const UserList = () => {
                 loading={isUsersLoading}
                 onChange={handleTableChange}
                 bordered
-                scroll={{ x: "100%" }}
+                scroll={{x: "100%"}}
             >
                 <Table.Column<User>
                     title="账号"
                     key="account"
                     dataIndex="account"
-                    sorter={{ multiple: 1 }}
+                    sorter={{multiple: 1}}
                     filterIcon={(filtered: boolean) => (
                         <SearchOutlined
-                            style={{ color: filtered ? "#1890ff" : undefined }}
+                            style={{color: filtered ? "#1890ff" : undefined}}
                         />
                     )}
                     filterDropdown={filterDropdown}
@@ -130,10 +130,10 @@ export const UserList = () => {
                     title="类型"
                     dataIndex="type"
                     key="type"
-                    sorter={{ multiple: 2 }}
+                    sorter={{multiple: 2}}
                     filters={[
-                        { text: "用户", value: "USER" },
-                        { text: "管理员", value: "ADMIN" }
+                        {text: "用户", value: "USER"},
+                        {text: "管理员", value: "ADMIN"}
                     ]}
                     render={(text, record) => getUserTypeInfo(record.type)}
                 />
@@ -141,10 +141,10 @@ export const UserList = () => {
                     title="状态"
                     dataIndex="state"
                     key="state"
-                    sorter={{ multiple: 3 }}
+                    sorter={{multiple: 3}}
                     filters={[
-                        { text: "正常", value: "ACTIVE" },
-                        { text: "封禁", value: "BANNED" }
+                        {text: "正常", value: "ACTIVE"},
+                        {text: "封禁", value: "BANNED"}
                     ]}
                     render={(text, record) => getUserStateInfo(record.state)}
                 />
@@ -152,10 +152,10 @@ export const UserList = () => {
                     title="姓名"
                     key="name"
                     dataIndex="name"
-                    sorter={{ multiple: 4 }}
+                    sorter={{multiple: 4}}
                     filterIcon={(filtered: boolean) => (
                         <SearchOutlined
-                            style={{ color: filtered ? "#1890ff" : undefined }}
+                            style={{color: filtered ? "#1890ff" : undefined}}
                         />
                     )}
                     filterDropdown={filterDropdown}
@@ -164,10 +164,10 @@ export const UserList = () => {
                     title="组织"
                     key="organization"
                     dataIndex="organization"
-                    sorter={{ multiple: 5 }}
+                    sorter={{multiple: 5}}
                     filterIcon={(filtered: boolean) => (
                         <SearchOutlined
-                            style={{ color: filtered ? "#1890ff" : undefined }}
+                            style={{color: filtered ? "#1890ff" : undefined}}
                         />
                     )}
                     filterDropdown={filterDropdown}
@@ -186,7 +186,7 @@ export const UserList = () => {
                     title="注册时间"
                     key="createdTime"
                     dataIndex="createdTime"
-                    sorter={{ multiple: 6 }}
+                    sorter={{multiple: 6}}
                     render={(text, record) => new Date(record.createdTime).toLocaleString()}
                 />
                 <Table.Column<User>
@@ -200,7 +200,7 @@ export const UserList = () => {
                                         try {
                                             await changeUserState({
                                                 account: record.account,
-                                                newState: record.state === "ACTIVE"?"BANNED":"ACTIVE"
+                                                newState: record.state === "ACTIVE" ? "BANNED" : "ACTIVE"
                                             });
                                         } catch (e) {
                                             message.error(e.message);
@@ -213,7 +213,7 @@ export const UserList = () => {
                                     <Button
                                         type="link"
                                         loading={isChangeUserStateLoading}
-                                    >{record.state==="ACTIVE"?"封禁":"解封"}</Button>
+                                    >{record.state === "ACTIVE" ? "封禁" : "解封"}</Button>
                                 </Popconfirm>
                                 <Link
                                     to={generatePath("/back/user/info/:account", {
@@ -222,7 +222,7 @@ export const UserList = () => {
                                 >详情</Link>
                                 <Button
                                     type="link"
-                                    onClick={()=>{
+                                    onClick={() => {
                                         setAuthorityManageAccount(record.account);
                                         setAuthorityManageModalVisible(true);
                                     }}
@@ -233,13 +233,13 @@ export const UserList = () => {
                 />
             </Table>
             {
-                me?.type==="ADMIN"?<>
+                me?.type === "ADMIN" ? <>
                     <UserAuthoritiesManageModal
                         account={authorityManageAccount}
                         visible={authorityManageModalVisible}
                         setVisible={setAuthorityManageModalVisible}
                     />
-                </>:<></>
+                </> : <></>
             }
         </>
     );

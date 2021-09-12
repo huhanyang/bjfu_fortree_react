@@ -18,7 +18,9 @@ export const TreesAddModal = ({
     const handleSubmit = async (value: AddTreesRequestParams) => {
         try {
             await addTrees({...value, recordId})
-                .then(()=>{setVisible(false);});
+                .then(() => {
+                    setVisible(false);
+                });
         } catch (e) {
             message.error(e.message);
         }
@@ -38,58 +40,58 @@ export const TreesAddModal = ({
                 onFinish={handleSubmit}
             >
                 <Form.List name="trees">
-                    {(fields, { add, remove }) => (
+                    {(fields, {add, remove}) => (
                         <>
                             {fields.map(field => (
                                 <>
-                                    <Space key={field.key} style={{ display: 'flex', marginBottom: 8 }} align="baseline">
+                                    <Space key={field.key} style={{display: 'flex', marginBottom: 8}} align="baseline">
                                         <Form.Item
                                             {...field}
                                             name={[field.name, 'treeId']}
                                             fieldKey={[field.fieldKey, 'treeId']}
                                         >
-                                            <Input placeholder="输入树木编号" maxLength={32} />
+                                            <Input placeholder="输入树木编号" maxLength={32}/>
                                         </Form.Item>
                                         <Form.Item
                                             {...field}
                                             name={[field.name, 'species']}
                                             fieldKey={[field.fieldKey, 'species']}
                                             rules={[
-                                                { required: true, message: '请输入树种!' }
+                                                {required: true, message: '请输入树种!'}
                                             ]}
                                         >
-                                            <Input placeholder="输入树种" maxLength={32} />
+                                            <Input placeholder="输入树种" maxLength={32}/>
                                         </Form.Item>
                                         <Form.Item
                                             {...field}
                                             name={[field.name, 'height']}
                                             fieldKey={[field.fieldKey, 'height']}
                                             rules={[
-                                                { required: true, message: '请输入树高!' }
+                                                {required: true, message: '请输入树高!'}
                                             ]}
                                         >
-                                            <Input type="number" placeholder="输入树高" suffix="厘米" />
+                                            <Input type="number" placeholder="输入树高" suffix="厘米"/>
                                         </Form.Item>
                                         <Form.Item
                                             {...field}
                                             name={[field.name, 'dbh']}
                                             fieldKey={[field.fieldKey, 'dbh']}
                                         >
-                                            <Input type="number" placeholder="输入胸径" suffix="厘米" />
+                                            <Input type="number" placeholder="输入胸径" suffix="厘米"/>
                                         </Form.Item>
                                         <Form.Item
                                             {...field}
                                             name={[field.name, 'crownWidth']}
                                             fieldKey={[field.fieldKey, 'crownWidth']}
                                         >
-                                            <Input type="number" placeholder="输入冠幅" suffix="厘米" />
+                                            <Input type="number" placeholder="输入冠幅" suffix="厘米"/>
                                         </Form.Item>
                                         <Form.Item
                                             {...field}
                                             name={[field.name, 'subbranchHeight']}
                                             fieldKey={[field.fieldKey, 'subbranchHeight']}
                                         >
-                                            <Input type="number" placeholder="输入枝下高" suffix="厘米" />
+                                            <Input type="number" placeholder="输入枝下高" suffix="厘米"/>
                                         </Form.Item>
                                         <Form.Item
                                             {...field}
@@ -105,12 +107,12 @@ export const TreesAddModal = ({
                                         >
                                             <Input type="number" placeholder="输入纬度"/>
                                         </Form.Item>
-                                        <MinusCircleOutlined onClick={() => remove(field.name)} />
+                                        <MinusCircleOutlined onClick={() => remove(field.name)}/>
                                     </Space>
                                 </>
                             ))}
                             <Form.Item>
-                                <Button type="dashed" onClick={() => add()} block icon={<PlusOutlined />}>
+                                <Button type="dashed" onClick={() => add()} block icon={<PlusOutlined/>}>
                                     添加一条
                                 </Button>
                             </Form.Item>

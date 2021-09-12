@@ -1,4 +1,3 @@
-
 export interface OssFile {
     id: number;
     createdTime: string;

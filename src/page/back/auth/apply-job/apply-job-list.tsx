@@ -25,8 +25,8 @@ export const ApplyJobList = () => {
         },
     } as GetApplyJobsRequestParams);
     const {data: applyJobs, isLoading: isApplyJobsLoading} = useApplyJobs(requestParams);
-    const [applyJobInfoDrawerVisible, setApplyJobInfoDrawerVisible] =useState(false);
-    const [applyJobId, setApplyJobId] =useState<number | undefined>();
+    const [applyJobInfoDrawerVisible, setApplyJobInfoDrawerVisible] = useState(false);
+    const [applyJobId, setApplyJobId] = useState<number | undefined>();
 
     const handleTableChange = (
         pagination: TablePaginationConfig,
@@ -61,15 +61,15 @@ export const ApplyJobList = () => {
                 loading={isApplyJobsLoading}
                 onChange={handleTableChange}
                 bordered
-                scroll={{ x: "100%" }}
+                scroll={{x: "100%"}}
             >
                 <Table.Column<ApplyJob>
                     title="类型"
                     key="type"
                     dataIndex="type"
-                    sorter={{ multiple: 1 }}
-                    filters={ApplyJobTypes.map(type=>{
-                        return { text: getApplyJobTypeInfo(type), value: type };
+                    sorter={{multiple: 1}}
+                    filters={ApplyJobTypes.map(type => {
+                        return {text: getApplyJobTypeInfo(type), value: type};
                     })}
                     render={(text, record) => getApplyJobTypeInfo(record.type)}
                 />
@@ -77,15 +77,15 @@ export const ApplyJobList = () => {
                     title="申请人"
                     key="applyUser"
                     dataIndex="applyUser"
-                    render={(text, record) => <UserPopover user={record.applyUser} />}
+                    render={(text, record) => <UserPopover user={record.applyUser}/>}
                 />
                 <Table.Column<ApplyJob>
                     title="状态"
                     key="state"
                     dataIndex="state"
-                    sorter={{ multiple: 2 }}
-                    filters={ApplyJobStates.map(state=>{
-                        return { text: getApplyJobStateInfo(state), value: state };
+                    sorter={{multiple: 2}}
+                    filters={ApplyJobStates.map(state => {
+                        return {text: getApplyJobStateInfo(state), value: state};
                     })}
                     render={(text, record) => getApplyJobStateInfo(record.state)}
                 />
@@ -93,20 +93,20 @@ export const ApplyJobList = () => {
                     title="申请时间"
                     key="createdTime"
                     dataIndex="createdTime"
-                    sorter={{ multiple: 3 }}
+                    sorter={{multiple: 3}}
                     render={(text, record) => new Date(record.createdTime).toLocaleString()}
                 />
                 <Table.Column<ApplyJob>
                     title="操作人"
                     key="operateUser"
                     dataIndex="operateUser"
-                    render={(text, record) => <UserPopover user={record.operateUser} />}
+                    render={(text, record) => <UserPopover user={record.operateUser}/>}
                 />
                 <Table.Column<ApplyJob>
                     title="操作时间"
                     key="operateTime"
                     dataIndex="operateTime"
-                    sorter={{ multiple: 4 }}
+                    sorter={{multiple: 4}}
                     render={(text, record) => new Date(record.operateTime).toLocaleString()}
                 />
                 <Table.Column<ApplyJob>
@@ -114,7 +114,7 @@ export const ApplyJobList = () => {
                     key="operate"
                     dataIndex="operate"
                     render={(text, record) => <>
-                        <Button type="link" onClick={()=>{
+                        <Button type="link" onClick={() => {
                             setApplyJobId(record.id);
                             setApplyJobInfoDrawerVisible(true);
                         }}>
@@ -128,7 +128,8 @@ export const ApplyJobList = () => {
                     </>}
                 />
             </Table>
-            <ApplyJobInfoDrawer id={applyJobId} visible={applyJobInfoDrawerVisible} setVisible={setApplyJobInfoDrawerVisible} />
+            <ApplyJobInfoDrawer id={applyJobId} visible={applyJobInfoDrawerVisible}
+                                setVisible={setApplyJobInfoDrawerVisible}/>
         </>
     );
 }

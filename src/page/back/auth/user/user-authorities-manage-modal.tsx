@@ -27,17 +27,17 @@ export const UserAuthoritiesManageModal = ({
                 setVisible(false);
             }}
         >
-            <Transfer<{key: AuthorityType}>
+            <Transfer<{ key: AuthorityType }>
                 listStyle={{
                     width: "100%",
                     height: "100%",
                 }}
                 disabled={isUserLoading}
                 titles={['未拥有的', '拥有的']}
-                dataSource={AuthorityTypes.map(type=>{
+                dataSource={AuthorityTypes.map(type => {
                     return {key: type};
                 })}
-                targetKeys={user?.authorities?.map(authority=>authority.type)}
+                targetKeys={user?.authorities?.map(authority => authority.type)}
                 onChange={async (targetKeys, direction, moveKeys) => {
                     try {
                         if (direction === "right") {

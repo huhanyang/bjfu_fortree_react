@@ -13,25 +13,23 @@ const bootstrapUser = async () => {
     if (token) {
         // 刷新token
         user = await http("user/me", {token});
-        if(user&&user.token&&user.token.length>10) {
+        if (user && user.token && user.token.length > 10) {
             window.localStorage.setItem(localStorageKey, user.token || "");
         }
     }
     return user;
 };
 
-const AuthContext = React.createContext<
-    | {
+const AuthContext = React.createContext<| {
     user: User | null;
     login: (params: LoginRequestParams) => Promise<void>;
     register: (params: RegisterRequestParams) => Promise<void>;
     logout: () => Promise<void>;
 }
-    | undefined
-    >(undefined);
+    | undefined>(undefined);
 AuthContext.displayName = "AuthContext";
 
-export const AuthProvider = ({ children }: { children: ReactNode }) => {
+export const AuthProvider = ({children}: { children: ReactNode }) => {
 
     const {
         data: user,
@@ -45,7 +43,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     const queryClient = useQueryClient();
 
     const login = (params: LoginRequestParams) => auth.login(params).then(setUser);
-    const register = (params: RegisterRequestParams) => auth.register(params).then(()=>{});
+    const register = (params: RegisterRequestParams) => auth.register(params).then(() => {
+    });
     const logout = () => auth.logout().then(() => {
         setUser(null);
         queryClient.clear();
@@ -66,7 +65,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     return (
         <AuthContext.Provider
             children={children}
-            value={{ user, login, register, logout }}
+            value={{user, login, register, logout}}
         />
     );
 };

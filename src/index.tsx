@@ -7,14 +7,14 @@ import {AppProviders} from './context';
 import {App} from "./app";
 
 ReactDOM.render(
-  <React.StrictMode>
-      <ConfigProvider locale={zhCN}>
-          <AppProviders>
-              <App />
-          </AppProviders>
-      </ConfigProvider>
-  </React.StrictMode>,
-  document.getElementById('root')
+    <React.StrictMode>
+        <ConfigProvider locale={zhCN}>
+            <AppProviders>
+                <App/>
+            </AppProviders>
+        </ConfigProvider>
+    </React.StrictMode>,
+    document.getElementById('root')
 );
 
 // todo 范围导出

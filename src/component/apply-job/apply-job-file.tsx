@@ -3,23 +3,27 @@ import {Button, message, Popover} from "antd";
 import {useDownloadApplyJobFile} from "../../utils/apply-job";
 
 
-export const ApplyJobFile = ({file, applyJobId, isUploadFile}:{file: OssFile|undefined; applyJobId: number; isUploadFile: boolean;}) => {
+export const ApplyJobFile = ({
+                                 file,
+                                 applyJobId,
+                                 isUploadFile
+                             }: { file: OssFile | undefined; applyJobId: number; isUploadFile: boolean; }) => {
 
     const {mutateAsync: downloadFile, isLoading: isDownloadFileLoading} = useDownloadApplyJobFile();
 
     return (
         <>
-            {file?<>
+            {file ? <>
                 <Popover
                     content={
                         <div>
                             文件名:{file.fileName}
-                            <br />
+                            <br/>
                             创建时间:{new Date(file.createdTime).toLocaleString()}
-                            {file.expiresTime?<>
-                                <br />
+                            {file.expiresTime ? <>
+                                <br/>
                                 过期时间:{new Date(file.expiresTime).toLocaleString()}
-                            </>:<></>}
+                            </> : <></>}
                         </div>
                     }
                     title="申请详情"
@@ -32,7 +36,7 @@ export const ApplyJobFile = ({file, applyJobId, isUploadFile}:{file: OssFile|und
                         }
                     }}>下载文件</Button>
                 </Popover>
-            </>:<>无文件</>}
+            </> : <>无文件</>}
         </>
     );
 }

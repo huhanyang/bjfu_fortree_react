@@ -11,9 +11,9 @@ export const ApplyJobRoutes = () => {
     const AdminRoutes = () => {
         return (
             <Routes>
-                <Route path="/info/:id" element={<ApplyJobInfo />} />
-                <Route path="/list-created" element={<ApplyJobListCreated />} />
-                <Route path="/list" element={<ApplyJobList />} />
+                <Route path="/info/:id" element={<ApplyJobInfo/>}/>
+                <Route path="/list-created" element={<ApplyJobListCreated/>}/>
+                <Route path="/list" element={<ApplyJobList/>}/>
             </Routes>
         );
     }
@@ -21,15 +21,15 @@ export const ApplyJobRoutes = () => {
     const UserRoutes = () => {
         return (
             <Routes>
-                <Route path="/info/:id" element={<ApplyJobInfo />} />
-                <Route path="/list-created" element={<ApplyJobListCreated />} />
+                <Route path="/info/:id" element={<ApplyJobInfo/>}/>
+                <Route path="/list-created" element={<ApplyJobListCreated/>}/>
             </Routes>
         );
     }
 
     return (
         <>
-            {me?.type==="ADMIN"?<AdminRoutes/>:<UserRoutes/>}
+            {me?.type === "ADMIN" ? <AdminRoutes/> : <UserRoutes/>}
         </>
     );
 }

@@ -2,7 +2,7 @@ import {Woodland} from "./woodland";
 import {User} from "./user";
 import {Tree} from "./tree";
 
-export type RecordType = "AUTO_CAL"|"USER_EDIT";
+export type RecordType = "AUTO_CAL" | "USER_EDIT";
 export const RecordTypes = ["AUTO_CAL", "USER_EDIT"] as RecordType[];
 export const getRecordTypeInfo = (type: RecordType) => {
     switch (type) {

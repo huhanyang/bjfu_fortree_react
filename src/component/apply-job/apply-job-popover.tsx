@@ -5,7 +5,7 @@ import {ApplyJob, getApplyJobStateInfo, getApplyJobTypeInfo} from "../../type/ap
 import {UserPopover} from "../user/user-popover";
 
 
-export const ApplyJobPopover = ({ applyJob }: { applyJob: ApplyJob | undefined }) => {
+export const ApplyJobPopover = ({applyJob}: { applyJob: ApplyJob | undefined }) => {
     return (
         <>
             {applyJob ? (
@@ -13,18 +13,18 @@ export const ApplyJobPopover = ({ applyJob }: { applyJob: ApplyJob | undefined }
                     content={
                         <div>
                             申请类型:{getApplyJobTypeInfo(applyJob.type)}
-                            <br />
+                            <br/>
                             申请时间:{new Date(applyJob.createdTime).toLocaleString()}
-                            <br />
+                            <br/>
                             申请状态:{getApplyJobStateInfo(applyJob.state)}
-                            <br />
+                            <br/>
                             申请信息:{applyJob.msg}
-                            {applyJob.operateUser?<>
-                                <br />
-                                操作人:{<UserPopover user={applyJob.operateUser} />}
-                                <br />
+                            {applyJob.operateUser ? <>
+                                <br/>
+                                操作人:{<UserPopover user={applyJob.operateUser}/>}
+                                <br/>
                                 操作时间:{new Date(applyJob.operateTime).toLocaleString()}
-                            </>:<></>}
+                            </> : <></>}
                         </div>
                     }
                     title="申请详情"

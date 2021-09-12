@@ -11,7 +11,7 @@ const appUrl = process.env.REACT_APP_URL;
 const ossUrl = process.env.REACT_APP_OSS_URL;
 
 
-export interface GetApplyJobsRequestParams extends PageAndSingleFieldSorterRequest{
+export interface GetApplyJobsRequestParams extends PageAndSingleFieldSorterRequest {
     type: ApplyJobType[];
     state: ApplyJobState[];
 }
@@ -82,11 +82,11 @@ export interface GetApplyJobDownloadFileUrlRequestParams {
 export const useDownloadApplyJobFile = () => {
     const client = useHttp();
     return useMutation(
-        (params:GetApplyJobDownloadFileUrlRequestParams) =>
-            client(`applyJob/getApplyJobDownloadFileInfo`, {data: params}).then((file: OssFile)=>{
-                if(file.url) {
+        (params: GetApplyJobDownloadFileUrlRequestParams) =>
+            client(`applyJob/getApplyJobDownloadFileInfo`, {data: params}).then((file: OssFile) => {
+                if (file.url) {
                     const link = document.createElement('a');
-                    if(appUrl&&ossUrl) {
+                    if (appUrl && ossUrl) {
                         link.href = file.url.replace(ossUrl, appUrl);
                     } else {
                         link.href = file.url;

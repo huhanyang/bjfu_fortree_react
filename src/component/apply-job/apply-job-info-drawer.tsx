@@ -3,8 +3,8 @@ import {Drawer} from "antd";
 import React from "react";
 
 
-export const ApplyJobInfoDrawer = ({id, visible, setVisible}:{
-    id: number|undefined,
+export const ApplyJobInfoDrawer = ({id, visible, setVisible}: {
+    id: number | undefined,
     visible: boolean;
     setVisible: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
@@ -14,10 +14,12 @@ export const ApplyJobInfoDrawer = ({id, visible, setVisible}:{
             title="申请详情"
             placement="right"
             width="70%"
-            onClose={()=>{setVisible(false);}}
+            onClose={() => {
+                setVisible(false);
+            }}
             visible={visible}
         >
-            {id?<ApplyJobInfo applyJobId={id} />:<></>}
+            {id ? <ApplyJobInfo applyJobId={id}/> : <></>}
         </Drawer>
     );
 }

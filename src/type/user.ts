@@ -25,7 +25,7 @@ export interface User {
 }
 
 export function getUserTypeInfo(type: UserType) {
-    switch(type) {
+    switch (type) {
         case 'USER':
             return '普通用户';
         case 'ADMIN':
@@ -36,7 +36,7 @@ export function getUserTypeInfo(type: UserType) {
 }
 
 export function getUserStateInfo(state: UserState) {
-    switch(state) {
+    switch (state) {
         case 'ACTIVE':
             return '活跃';
         case 'BANNED':

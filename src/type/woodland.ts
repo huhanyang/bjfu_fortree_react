@@ -2,7 +2,7 @@ import {User} from "./user";
 import {Record} from "./record";
 import {Point} from "./point";
 
-export type WoodlandShape = "SQUARE"|"RECTANGLE"|"CIRCULAR";
+export type WoodlandShape = "SQUARE" | "RECTANGLE" | "CIRCULAR";
 
 export interface Woodland {
     id: number;
@@ -23,7 +23,7 @@ export interface Woodland {
 }
 
 export function getWoodlandShapeInfo(shape: WoodlandShape) {
-    switch(shape) {
+    switch (shape) {
         case 'SQUARE':
             return '正方形';
         case 'RECTANGLE':

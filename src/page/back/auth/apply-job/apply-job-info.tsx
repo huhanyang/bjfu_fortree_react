@@ -4,11 +4,11 @@ import {ApplyJobInfo as ApplyJobInfoComponent} from "../../../../component/apply
 
 export const ApplyJobInfo = () => {
 
-    const { id } = useParams();
+    const {id} = useParams();
 
     return (
-       <>
-           {id?<ApplyJobInfoComponent applyJobId={Number(id)} />:<></>}
-       </>
+        <>
+            {id ? <ApplyJobInfoComponent applyJobId={Number(id)}/> : <></>}
+        </>
     );
 }

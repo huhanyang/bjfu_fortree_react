@@ -8,21 +8,21 @@ export const UnAuthenticatedApp = () => {
 
     return (
         <Row>
-            <Col xs={0} sm={4} md={6} lg={8} xl={8} />
+            <Col xs={0} sm={4} md={6} lg={8} xl={8}/>
             <Col
                 xs={24}
                 sm={16}
                 md={12}
                 lg={8}
                 xl={8}
-                style={{ paddingTop: "5vh", paddingBottom: "10vh" }}
+                style={{paddingTop: "5vh", paddingBottom: "10vh"}}
             >
                 <Header><Link to="/front">树木数据库</Link></Header>
                 <ShadowCard>
-                    <UnAuthRoutes />
+                    <UnAuthRoutes/>
                 </ShadowCard>
             </Col>
-            <Col xs={0} sm={4} md={6} lg={8} xl={8} />
+            <Col xs={0} sm={4} md={6} lg={8} xl={8}/>
         </Row>
     );
 };

@@ -14,16 +14,16 @@ import {exportWoodlandDetailInfo} from "../../utils/export";
 import {Map, Marker} from 'react-bmapgl';
 
 
-export const WoodlandInfo = ({id}:{id: number}) => {
+export const WoodlandInfo = ({id}: { id: number }) => {
 
-    const { data: woodland } = useWoodland(Number(id));
+    const {data: woodland} = useWoodland(Number(id));
     const [showMap, setShowMap] = useState(false);
     const [record, setRecord] = useState<Record | undefined>(undefined);
-    useEffect(()=>{
-        if(woodland&&woodland.records&&woodland.records.length>0) {
+    useEffect(() => {
+        if (woodland && woodland.records && woodland.records.length > 0) {
             setRecord(woodland.records[0]);
         }
-    },[woodland]);
+    }, [woodland]);
     const [woodlandEditModalVisible, setWoodlandEditModalVisible] = useState(false);
     const {mutateAsync: deleteWoodland, isLoading: isDeleteWoodlandLoading} = useDeleteWoodland();
     const [recordAddModalVisible, setRecordAddModalVisible] = useState(false);
@@ -33,14 +33,19 @@ export const WoodlandInfo = ({id}:{id: number}) => {
     const {mutateAsync: deleteRecord, isLoading: isDeleteRecordLoading} = useDeleteRecord();
 
 
-
-    const WoodlandDetail = ({woodlandInfo}:{woodlandInfo: Woodland}) => {
+    const WoodlandDetail = ({woodlandInfo}: { woodlandInfo: Woodland }) => {
         return (
             <Descriptions title="申请详情" bordered extra={
                 <>
-                    <Button onClick={()=>{exportWoodlandDetailInfo(woodlandInfo.id, woodlandInfo.name);}}>导出信息</Button>
-                    <Button onClick={()=>{setRecordAddModalVisible(true);}}>添加记录</Button>
-                    <Button onClick={()=>{setWoodlandEditModalVisible(true);}}>编辑信息</Button>
+                    <Button onClick={() => {
+                        exportWoodlandDetailInfo(woodlandInfo.id, woodlandInfo.name);
+                    }}>导出信息</Button>
+                    <Button onClick={() => {
+                        setRecordAddModalVisible(true);
+                    }}>添加记录</Button>
+                    <Button onClick={() => {
+                        setWoodlandEditModalVisible(true);
+                    }}>编辑信息</Button>
                     <Popconfirm
                         onConfirm={async () => {
                             try {
@@ -60,23 +65,31 @@ export const WoodlandInfo = ({id}:{id: number}) => {
                 </>
             }>
                 <Descriptions.Item label="林地名">{woodlandInfo.name}</Descriptions.Item>
-                <Descriptions.Item label="创建人">{<UserPopover user={woodlandInfo.creator} />}</Descriptions.Item>
-                <Descriptions.Item label="行政地区">{woodlandInfo.country+'/'+woodlandInfo.province+'/'+woodlandInfo.city}</Descriptions.Item>
+                <Descriptions.Item label="创建人">{<UserPopover user={woodlandInfo.creator}/>}</Descriptions.Item>
+                <Descriptions.Item
+                    label="行政地区">{woodlandInfo.country + '/' + woodlandInfo.province + '/' + woodlandInfo.city}</Descriptions.Item>
                 <Descriptions.Item label="详细地址">{woodlandInfo.address}</Descriptions.Item>
-                <Descriptions.Item label="坐标">{woodlandInfo.position.longitude+'-'+woodlandInfo.position.latitude}</Descriptions.Item>
+                <Descriptions.Item
+                    label="坐标">{woodlandInfo.position.longitude + '-' + woodlandInfo.position.latitude}</Descriptions.Item>
                 <Descriptions.Item label="形状">{getWoodlandShapeInfo(woodlandInfo.shape)}</Descriptions.Item>
-                <Descriptions.Item label="长宽(m)">{woodlandInfo.length+'*'+woodlandInfo.width}</Descriptions.Item>
+                <Descriptions.Item label="长宽(m)">{woodlandInfo.length + '*' + woodlandInfo.width}</Descriptions.Item>
                 <Descriptions.Item label="附加信息">{woodlandInfo.addition}</Descriptions.Item>
             </Descriptions>
         );
     }
 
-    const RecordDetail = ({recordInfo}:{recordInfo: Record}) => {
+    const RecordDetail = ({recordInfo}: { recordInfo: Record }) => {
         return (
             <Descriptions title="林地记录" bordered extra={<>
-                <Button onClick={()=>{setTreesAddModalVisible(true);}}>添加树木</Button>
-                <Button onClick={()=>{setTreesAddByExcelModalVisible(true);}}>上传树木</Button>
-                <Button onClick={()=>{setRecordEditModalVisible(true);}}>修改信息</Button>
+                <Button onClick={() => {
+                    setTreesAddModalVisible(true);
+                }}>添加树木</Button>
+                <Button onClick={() => {
+                    setTreesAddByExcelModalVisible(true);
+                }}>上传树木</Button>
+                <Button onClick={() => {
+                    setRecordEditModalVisible(true);
+                }}>修改信息</Button>
                 <Popconfirm
                     onConfirm={async () => {
                         try {
@@ -95,7 +108,7 @@ export const WoodlandInfo = ({id}:{id: number}) => {
                     >删除</Button>
                 </Popconfirm>
             </>}>
-                <Descriptions.Item label="创建人">{<UserPopover user={recordInfo.creator} />}</Descriptions.Item>
+                <Descriptions.Item label="创建人">{<UserPopover user={recordInfo.creator}/>}</Descriptions.Item>
                 <Descriptions.Item label="树木总数(棵)">{recordInfo.treeCount}</Descriptions.Item>
                 <Descriptions.Item label="最大树高(cm)">{recordInfo.maxHeight}</Descriptions.Item>
                 <Descriptions.Item label="最小树高(cm)">{recordInfo.minHeight}</Descriptions.Item>
@@ -103,29 +116,33 @@ export const WoodlandInfo = ({id}:{id: number}) => {
                 <Descriptions.Item label="测量时间">{new Date(recordInfo.measureTime).toLocaleString()}</Descriptions.Item>
                 <Descriptions.Item label="记录类型">{getRecordTypeInfo(recordInfo.type)}</Descriptions.Item>
                 <Descriptions.Item label="树高测量方式">{recordInfo.measureType}</Descriptions.Item>
-                <Descriptions.Item label="郁闭度">{recordInfo.canopyDensity+"%"}</Descriptions.Item>
+                <Descriptions.Item label="郁闭度">{recordInfo.canopyDensity + "%"}</Descriptions.Item>
                 <Descriptions.Item label="优势树种">{recordInfo.dominantSpecies}</Descriptions.Item>
-                {recordInfo.ageGroup?<Descriptions.Item label="龄组">{recordInfo.ageGroup}</Descriptions.Item>:<></>}
-                {recordInfo.slope?<Descriptions.Item label="坡度">{recordInfo.slope}</Descriptions.Item>:<></>}
-                {recordInfo.aspect?<Descriptions.Item label="坡向">{recordInfo.aspect}</Descriptions.Item>:<></>}
-                {recordInfo.origin?<Descriptions.Item label="起源">{recordInfo.origin}</Descriptions.Item>:<></>}
-                {recordInfo.speciesComposition?<Descriptions.Item label="树种组成">{recordInfo.speciesComposition}</Descriptions.Item>:<></>}
-                {recordInfo.addition?<Descriptions.Item label="附加信息">{recordInfo.addition}</Descriptions.Item>:<></>}
+                {recordInfo.ageGroup ? <Descriptions.Item label="龄组">{recordInfo.ageGroup}</Descriptions.Item> : <></>}
+                {recordInfo.slope ? <Descriptions.Item label="坡度">{recordInfo.slope}</Descriptions.Item> : <></>}
+                {recordInfo.aspect ? <Descriptions.Item label="坡向">{recordInfo.aspect}</Descriptions.Item> : <></>}
+                {recordInfo.origin ? <Descriptions.Item label="起源">{recordInfo.origin}</Descriptions.Item> : <></>}
+                {recordInfo.speciesComposition ?
+                    <Descriptions.Item label="树种组成">{recordInfo.speciesComposition}</Descriptions.Item> : <></>}
+                {recordInfo.addition ?
+                    <Descriptions.Item label="附加信息">{recordInfo.addition}</Descriptions.Item> : <></>}
             </Descriptions>
         );
     }
 
     return (
         <>
-            {woodland?<WoodlandDetail woodlandInfo={woodland} />:<></>}<Divider />
-            {woodland?<>
+            {woodland ? <WoodlandDetail woodlandInfo={woodland}/> : <></>}<Divider/>
+            {woodland ? <>
                 展示地图:
                 <Switch
-                    onChange={(checked, event)=>{setShowMap(checked)}}
+                    onChange={(checked, event) => {
+                        setShowMap(checked)
+                    }}
                     checked={showMap}
                 />
-            </>:<></>}
-            {showMap&&woodland?<>
+            </> : <></>}
+            {showMap && woodland ? <>
                 <Map
                     center={new BMapGL.Point(woodland.position.longitude, woodland.position.latitude)}
                     zoom={20}
@@ -135,13 +152,13 @@ export const WoodlandInfo = ({id}:{id: number}) => {
                 >
                     {
                         // @ts-ignore
-                        <Marker position={new BMapGL.Point(woodland.position.longitude, woodland.position.latitude)} />
+                        <Marker position={new BMapGL.Point(woodland.position.longitude, woodland.position.latitude)}/>
                     }
                 </Map>
-            </>:<></>}
+            </> : <></>}
             {
-                woodland&&woodland.records&&woodland.records[0]?<>
-                    <div style={{ float: 'right' }}>
+                woodland && woodland.records && woodland.records[0] ? <>
+                    <div style={{float: 'right'}}>
                         记录测量时间:
                         <Select
                             defaultValue={0}
@@ -152,27 +169,32 @@ export const WoodlandInfo = ({id}:{id: number}) => {
                         >
                             {
                                 // @ts-ignore
-                                woodland.records.map((record) => <Select.Option value={woodland.records.indexOf(record)}>
+                                woodland.records.map((record) => <Select.Option
+                                    value={woodland.records.indexOf(record)}>
                                     {new Date(record.measureTime).toLocaleString()}
                                 </Select.Option>)
                             }
                         </Select>
                     </div>
-                </>:<></>
+                </> : <></>
             }
-            <Divider />
-            {record?<RecordDetail recordInfo={record} />:<></>}<Divider />
-            {record?<TreeList woodlandId={id} recordId={record.id} />:<></>}
-            {woodland?<>
-                <WoodlandEditModal woodlandId={id} visible={woodlandEditModalVisible} setVisible={setWoodlandEditModalVisible} />
-                <RecordAddModal woodlandId={id} visible={recordAddModalVisible} setVisible={setRecordAddModalVisible} />
-            </>:<></>}
+            <Divider/>
+            {record ? <RecordDetail recordInfo={record}/> : <></>}<Divider/>
+            {record ? <TreeList woodlandId={id} recordId={record.id}/> : <></>}
+            {woodland ? <>
+                <WoodlandEditModal woodlandId={id} visible={woodlandEditModalVisible}
+                                   setVisible={setWoodlandEditModalVisible}/>
+                <RecordAddModal woodlandId={id} visible={recordAddModalVisible} setVisible={setRecordAddModalVisible}/>
+            </> : <></>}
             {
-                record?<>
-                    <RecordEditModal record={record} visible={recordEditModalVisible} setVisible={setRecordEditModalVisible} />
-                    <TreesAddModal recordId={record.id} visible={treesAddModalVisible} setVisible={setTreesAddModalVisible} />
-                    <TreesAddExcelModal recordId={record.id} visible={treesAddByExcelModalVisible} setVisible={setTreesAddByExcelModalVisible} />
-                </>:<></>
+                record ? <>
+                    <RecordEditModal record={record} visible={recordEditModalVisible}
+                                     setVisible={setRecordEditModalVisible}/>
+                    <TreesAddModal recordId={record.id} visible={treesAddModalVisible}
+                                   setVisible={setTreesAddModalVisible}/>
+                    <TreesAddExcelModal recordId={record.id} visible={treesAddByExcelModalVisible}
+                                        setVisible={setTreesAddByExcelModalVisible}/>
+                </> : <></>
             }
         </>
     );

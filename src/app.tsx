@@ -12,9 +12,9 @@ export const App = () => {
         <div className="App">
             <ErrorBoundary fallbackRender={FullPageErrorFallback}>
                 <Routes>
-                    <Route path="/front/*" element={<FrontPage />} />
-                    <Route path="/back/*" element={<BackPage />} />
-                    <Navigate to="/front" />
+                    <Route path="/front/*" element={<FrontPage/>}/>
+                    <Route path="/back/*" element={<BackPage/>}/>
+                    <Navigate to="/front"/>
                 </Routes>
             </ErrorBoundary>
         </div>

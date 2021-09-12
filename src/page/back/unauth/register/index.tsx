@@ -8,13 +8,15 @@ import {useNavigate} from "react-router";
 
 export const Register = () => {
 
-    const { register } = useAuth();
-    const { run, isLoading } = useAsync(undefined, { throwOnError: true });
+    const {register} = useAuth();
+    const {run, isLoading} = useAsync(undefined, {throwOnError: true});
     const navigate = useNavigate();
 
     const handleSubmit = async (values: RegisterRequestParams) => {
         try {
-            await run(register(values)).then(()=>{navigate("/front", { replace: true });});
+            await run(register(values)).then(() => {
+                navigate("/front", {replace: true});
+            });
         } catch (e) {
             message.error(e.message);
         }
@@ -29,22 +31,22 @@ export const Register = () => {
             >
                 <Form.Item
                     name={"account"}
-                    rules={[{ required: true, message: "请输入账号" }, { type: 'string', min: 8, message: '账号长度不小于8!' }]}
+                    rules={[{required: true, message: "请输入账号"}, {type: 'string', min: 8, message: '账号长度不小于8!'}]}
                 >
-                    <Input placeholder={"账号"} type="text" maxLength={32} />
+                    <Input placeholder={"账号"} type="text" maxLength={32}/>
                 </Form.Item>
                 <Form.Item
                     name={"password"}
-                    rules={[{ required: true, message: "请输入密码" }, { type: 'string', min: 8, message: '密码长度不小于8!' }]}
+                    rules={[{required: true, message: "请输入密码"}, {type: 'string', min: 8, message: '密码长度不小于8!'}]}
                 >
-                    <Input.Password placeholder={"密码"} maxLength={32} />
+                    <Input.Password placeholder={"密码"} maxLength={32}/>
                 </Form.Item>
                 <Form.Item
                     name="confirm-password"
                     dependencies={['password']}
                     rules={[
-                        { required: true, message: '请再次确认密码!' },
-                        ({ getFieldValue }) => ({
+                        {required: true, message: '请再次确认密码!'},
+                        ({getFieldValue}) => ({
                             validator(_, value) {
                                 if (!value || getFieldValue('password') === value) {
                                     return Promise.resolve();
@@ -55,34 +57,34 @@ export const Register = () => {
                     ]}
                     hasFeedback
                 >
-                    <Input.Password placeholder={"确认密码"} maxLength={32} />
+                    <Input.Password placeholder={"确认密码"} maxLength={32}/>
                 </Form.Item>
                 <Form.Item
                     name={"name"}
-                    rules={[{ required: true, message: "请输入姓名" }]}
+                    rules={[{required: true, message: "请输入姓名"}]}
                 >
-                    <Input placeholder={"姓名"} type="text" maxLength={32} />
+                    <Input placeholder={"姓名"} type="text" maxLength={32}/>
                 </Form.Item>
                 <Form.Item
                     name={"organization"}
-                    rules={[{ required: true, message: "请输入组织" }]}
+                    rules={[{required: true, message: "请输入组织"}]}
                 >
-                    <Input placeholder={"组织"} type="text" maxLength={32} />
+                    <Input placeholder={"组织"} type="text" maxLength={32}/>
                 </Form.Item>
                 <Form.Item
                     name={"phone"}
-                    rules={[{ required: true, message: "请输入手机号码" }]}
+                    rules={[{required: true, message: "请输入手机号码"}]}
                 >
-                    <Input placeholder={"手机"} type="text" maxLength={11} />
+                    <Input placeholder={"手机"} type="text" maxLength={11}/>
                 </Form.Item>
                 <Form.Item
                     name={"email"}
                     rules={[{
                         type: 'email',
                         message: '请输入正确的邮箱',
-                    },{ required: true, message: "请输入邮箱" }]}
+                    }, {required: true, message: "请输入邮箱"}]}
                 >
-                    <Input placeholder={"邮箱"} type="text" maxLength={32} />
+                    <Input placeholder={"邮箱"} type="text" maxLength={32}/>
                 </Form.Item>
 
                 <Form.Item>
@@ -91,11 +93,11 @@ export const Register = () => {
                     </LongButton>
                 </Form.Item>
             </Form>
-            <Divider />
-            <Link style={{ float: "left" }} to={"/back/login"}>
+            <Divider/>
+            <Link style={{float: "left"}} to={"/back/login"}>
                 去登录
             </Link>
-            <Link style={{ float: "right" }} to={"/front"}>
+            <Link style={{float: "right"}} to={"/front"}>
                 去首页
             </Link>
         </>

@@ -12,32 +12,36 @@ import {UserSider} from "./user-sider";
 
 export const AuthenticatedApp = () => {
     const [collapsed, setCollapsed] = useState(false);
-    const { logout, user } = useAuth();
+    const {logout, user} = useAuth();
     const navigate = useNavigate();
 
     const menu = (
         <Menu>
             <Menu.Item key="my-info">
-                <Button type="link" onClick={()=>{navigate(generatePath("/front"), { replace: true });}}>
+                <Button type="link" onClick={() => {
+                    navigate(generatePath("/front"), {replace: true});
+                }}>
                     进入首页
                 </Button>
             </Menu.Item>
             <Menu.Item key="my-info">
-                <Button type="link" onClick={()=>{
+                <Button type="link" onClick={() => {
                     navigate(generatePath("/back/user/info/:account", {account: String(user?.account),}),
-                        { replace: true });
+                        {replace: true});
                 }}>个人信息</Button>
             </Menu.Item>
             <Menu.Item key="logout">
-                <Button type="link" onClick={()=>{
-                    logout().then(()=>{navigate("/back/login", { replace: true });});
+                <Button type="link" onClick={() => {
+                    logout().then(() => {
+                        navigate("/back/login", {replace: true});
+                    });
                 }}>退出登录</Button>
             </Menu.Item>
         </Menu>
     );
 
     return (
-        <Layout style={{ minHeight: "100vh" }}>
+        <Layout style={{minHeight: "100vh"}}>
             <Header>
                 <Hover
                     onClick={() => {
@@ -57,18 +61,18 @@ export const AuthenticatedApp = () => {
             </Header>
             <Layout>
                 {user?.type === "USER" ? (
-                    <UserSider collapsed={collapsed} setCollapsed={setCollapsed} />
+                    <UserSider collapsed={collapsed} setCollapsed={setCollapsed}/>
                 ) : (
                     <></>
                 )}
                 {user?.type === "ADMIN" ? (
-                    <AdminSider collapsed={collapsed} setCollapsed={setCollapsed} />
+                    <AdminSider collapsed={collapsed} setCollapsed={setCollapsed}/>
                 ) : (
                     <></>
                 )}
                 <Layout>
                     <Content>
-                        <AuthRoutes />
+                        <AuthRoutes/>
                     </Content>
                 </Layout>
             </Layout>

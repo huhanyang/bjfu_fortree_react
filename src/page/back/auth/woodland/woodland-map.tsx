@@ -1,12 +1,11 @@
-import {GetAllWoodlandsRequestParams, useAllWoodlands, useAllWoodlandsByFilter} from "../../../../utils/woodland";
+import {GetAllWoodlandsRequestParams, useAllWoodlandsByFilter} from "../../../../utils/woodland";
 import {DrawingManager, InfoWindow, Map, Marker, ScaleControl} from "react-bmapgl";
 import React, {useState} from "react";
 import {getWoodlandShapeInfo, Woodland} from "../../../../type/woodland";
 import {useDebounce} from "../../../../utils";
 import {WoodlandInfoDrawer} from "../../../../component/woodland/woodland-info-drawer";
-import {AutoComplete, Button, Dropdown, Form, Input, InputNumber, message, Select} from "antd";
-import { DownOutlined } from '@ant-design/icons';
-import {ExportWoodlandsInBoundsRequestParams, useExportWoodlandsInBounds} from "../../../../utils/export";
+import {Button, Dropdown, Form, Input, message, Select} from "antd";
+import {useExportWoodlandsInBounds} from "../../../../utils/export";
 import {useNavigate} from "react-router";
 
 
@@ -14,14 +13,13 @@ export const WoodlandMap = () => {
 
     const [request, setRequest] = useState<GetAllWoodlandsRequestParams>({});
     const {data: woodlands, isLoading} = useAllWoodlandsByFilter(request);
-    const [popoverWoodlandState, setPopoverWoodlandState] = useState<Woodland|undefined>();
-    const popoverWoodland =useDebounce(popoverWoodlandState, 500);
+    const [popoverWoodlandState, setPopoverWoodlandState] = useState<Woodland | undefined>();
+    const popoverWoodland = useDebounce(popoverWoodlandState, 500);
     const [woodlandDetailVisible, setWoodlandDetailVisible] = useState(false);
-    const [woodlandDetailId, setWoodlandDetailId] = useState<number|undefined>();
+    const [woodlandDetailId, setWoodlandDetailId] = useState<number | undefined>();
     const [filterFormVisible, setFilterFormVisible] = useState<boolean>(false);
     const [isDrawing, setIsDrawing] = useState<boolean>(false);
-    const [exportParams, setExportParams] = useState<ExportWoodlandsInBoundsRequestParams|undefined>();
-    const {mutateAsync: exportWoodlands, isLoading: isExportWoodlandsLoading} = useExportWoodlandsInBounds();
+    const {mutateAsync: exportWoodlands} = useExportWoodlandsInBounds();
     const navigate = useNavigate();
 
     const onFinish = (params: GetAllWoodlandsRequestParams) => {
@@ -29,7 +27,7 @@ export const WoodlandMap = () => {
         setRequest(params);
     }
 
-    const FilterForm = () =>  <Form
+    const FilterForm = () => <Form
         initialValues={{
             areaDirection: "MIN",
             treeCountDirection: "MIN",
@@ -40,7 +38,7 @@ export const WoodlandMap = () => {
         </Form.Item>
         <Form.Item label="行政地区">
             <Input.Group compact>
-                <Form.Item name="country" >
+                <Form.Item name="country">
                     <Input placeholder="输入国家"/>
                 </Form.Item>
                 <Form.Item name="province">
@@ -60,7 +58,7 @@ export const WoodlandMap = () => {
                     </Select>
                 </Form.Item>
                 <Form.Item name="area">
-                    <Input type="number" placeholder="输入林地面积" suffix="平方米" />
+                    <Input type="number" placeholder="输入林地面积" suffix="平方米"/>
                 </Form.Item>
             </Input.Group>
         </Form.Item>
@@ -73,7 +71,7 @@ export const WoodlandMap = () => {
                     </Select>
                 </Form.Item>
                 <Form.Item name="treeCount">
-                    <Input type="number" placeholder="输入树木总数" suffix="棵" />
+                    <Input type="number" placeholder="输入树木总数" suffix="棵"/>
                 </Form.Item>
             </Input.Group>
         </Form.Item>
@@ -86,7 +84,7 @@ export const WoodlandMap = () => {
                     </Select>
                 </Form.Item>
                 <Form.Item name="treeMeanHeight">
-                    <Input type="number" placeholder="输入平均树高" suffix="厘米" />
+                    <Input type="number" placeholder="输入平均树高" suffix="厘米"/>
                 </Form.Item>
             </Input.Group>
         </Form.Item>
@@ -100,60 +98,60 @@ export const WoodlandMap = () => {
     return (
         <>
             <Dropdown visible={filterFormVisible} trigger={["click"]} overlay={FilterForm} onVisibleChange={flag => {
-                    setFilterFormVisible(flag);
-                }}
+                setFilterFormVisible(flag);
+            }}
             >
                 <Button>点击筛选</Button>
             </Dropdown>
-            <Button onClick={()=>{
+            <Button onClick={() => {
                 console.log(isDrawing);
                 setIsDrawing(!isDrawing);
             }}>多边形导出</Button>
-            {woodlands?<Map
+            {woodlands ? <Map
                 center={new BMapGL.Point(116.40345879918985, 39.92396687340759)}
                 zoom={5}
                 enableDoubleClickZoom
                 enableScrollWheelZoom
                 enableDragging
-                onClick={()=>{
+                onClick={() => {
                     setPopoverWoodlandState(undefined);
                 }}
             >
-                <ScaleControl />
-                {isDrawing?<DrawingManager
+                <ScaleControl/>
+                {isDrawing ? <DrawingManager
                     enableGpc
                     drawingToolOptions={{drawingModes: ["polygon"]}}
                     onOverlaycomplete={(e, info) => {
                         try {
-                           exportWoodlands({
-                               polygon: {
-                                   g2dPointList: (info.overlay.points.map(point => {
-                                       if (point.latLng) {
-                                           return {
-                                               longitude: point.latLng.lng,
-                                               latitude: point.latLng.lat
-                                           }
-                                       } else {
-                                           return {
-                                               longitude: info.overlay.points[0].latLng.lng,
-                                               latitude: info.overlay.points[0].latLng.lat
-                                           };
-                                       }
-                                   }))
-                               }
-                           }).then(() => {
+                            exportWoodlands({
+                                polygon: {
+                                    g2dPointList: (info.overlay.points.map(point => {
+                                        if (point.latLng) {
+                                            return {
+                                                longitude: point.latLng.lng,
+                                                latitude: point.latLng.lat
+                                            }
+                                        } else {
+                                            return {
+                                                longitude: info.overlay.points[0].latLng.lng,
+                                                latitude: info.overlay.points[0].latLng.lat
+                                            };
+                                        }
+                                    }))
+                                }
+                            }).then(() => {
                                 navigate("/back/apply-job/list-created", {replace: true});
                             });
                         } catch (e) {
                             message.error(e.message);
                         }
                     }}
-                />:<></>}
+                /> : <></>}
                 {
                     // @ts-ignore
-                    woodlands.map(woodland=> <Marker
+                    woodlands.map(woodland => <Marker
                         position={new BMapGL.Point(woodland.position.longitude, woodland.position.latitude)}
-                        onClick={()=>{
+                        onClick={() => {
                             // 打开林地详情
                             setWoodlandDetailId(woodland.id);
                             setWoodlandDetailVisible(true);
@@ -165,23 +163,26 @@ export const WoodlandMap = () => {
                     />)
                 }
                 {
-                    popoverWoodland?
+                    popoverWoodland ?
                         // @ts-ignore
-                    <InfoWindow
-                        position={new BMapGL.Point(popoverWoodland.position.longitude, popoverWoodland.position.latitude)}
-                        title={popoverWoodland.name}
-                        text={
-                            `
+                        <InfoWindow
+                            position={new BMapGL.Point(popoverWoodland.position.longitude, popoverWoodland.position.latitude)}
+                            title={popoverWoodland.name}
+                            text={
+                                `
                                 ${popoverWoodland.country}/${popoverWoodland.province}/${popoverWoodland.city}\n
                                 ${popoverWoodland.address}\n
                                 ${getWoodlandShapeInfo(popoverWoodland.shape)} ${popoverWoodland.length}(M)x${popoverWoodland.width}(M)
                             `
-                        }
-                        onClickclose={() => {setPopoverWoodlandState(undefined);}}
-                    />:<></>
+                            }
+                            onClickclose={() => {
+                                setPopoverWoodlandState(undefined);
+                            }}
+                        /> : <></>
                 }
-            </Map>:<></>}
-            <WoodlandInfoDrawer id={woodlandDetailId} visible={woodlandDetailVisible} setVisible={setWoodlandDetailVisible}/>
+            </Map> : <></>}
+            <WoodlandInfoDrawer id={woodlandDetailId} visible={woodlandDetailVisible}
+                                setVisible={setWoodlandDetailVisible}/>
         </>
     );
 }

@@ -9,10 +9,10 @@ export const AuthRoutes = () => {
     return (
         <>
             <Routes>
-                <Route path="/user/*" element={<UserRoutes />} />
-                <Route path="/woodland/*" element={<WoodlandRoutes />} />
-                <Route path="/apply-job/*" element={<ApplyJobRoutes />} />
-                <Navigate to="/back/woodland/map" />
+                <Route path="/user/*" element={<UserRoutes/>}/>
+                <Route path="/woodland/*" element={<WoodlandRoutes/>}/>
+                <Route path="/apply-job/*" element={<ApplyJobRoutes/>}/>
+                <Navigate to="/back/woodland/map"/>
             </Routes>
         </>
     );

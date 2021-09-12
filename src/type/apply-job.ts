@@ -1,15 +1,33 @@
 import {User} from "./user";
 import {OssFile} from "./oss-file";
 
-export type ApplyJobType = "CREATE_WOODLAND"|"ADD_RECORD_IN_WOODLAND"|"ADD_TREES_IN_RECORD"|
-    "ADD_TREES_BY_EXCEL_IN_RECORD"|"DELETE_WOODLAND"|"DELETE_RECORD_IN_WOODLAND"|
-    "DELETE_TREES_IN_RECORD"|"EDIT_WOODLAND"|"EDIT_RECORD"|"EXPORT_WOODLANDS_INFO"|"EXPORT_WOODLANDS_IN_BOUNDS"|"CONFIRM_REGISTER";
+export type ApplyJobType =
+    "CREATE_WOODLAND"
+    | "ADD_RECORD_IN_WOODLAND"
+    | "ADD_TREES_IN_RECORD"
+    |
+    "ADD_TREES_BY_EXCEL_IN_RECORD"
+    | "DELETE_WOODLAND"
+    | "DELETE_RECORD_IN_WOODLAND"
+    |
+    "DELETE_TREES_IN_RECORD"
+    | "EDIT_WOODLAND"
+    | "EDIT_RECORD"
+    | "EXPORT_WOODLANDS_INFO"
+    | "EXPORT_WOODLANDS_IN_BOUNDS"
+    | "CONFIRM_REGISTER";
 
-export const ApplyJobTypes: ApplyJobType[]  = ["CREATE_WOODLAND", "ADD_RECORD_IN_WOODLAND", "ADD_TREES_IN_RECORD",
+export const ApplyJobTypes: ApplyJobType[] = ["CREATE_WOODLAND", "ADD_RECORD_IN_WOODLAND", "ADD_TREES_IN_RECORD",
     "ADD_TREES_BY_EXCEL_IN_RECORD", "DELETE_WOODLAND", "DELETE_RECORD_IN_WOODLAND",
     "DELETE_TREES_IN_RECORD", "EDIT_WOODLAND", "EDIT_RECORD", "EXPORT_WOODLANDS_INFO", "EXPORT_WOODLANDS_IN_BOUNDS", "CONFIRM_REGISTER"];
 
-export type ApplyJobState = "APPLYING"|"CANCELLED"|"PASSED"|"PASSED_EXECUTION_SUCCESS"|"PASSED_EXECUTION_FAILED"|"NOT_PASSED";
+export type ApplyJobState =
+    "APPLYING"
+    | "CANCELLED"
+    | "PASSED"
+    | "PASSED_EXECUTION_SUCCESS"
+    | "PASSED_EXECUTION_FAILED"
+    | "NOT_PASSED";
 
 export const ApplyJobStates: ApplyJobState[] = ["APPLYING", "CANCELLED", "PASSED",
     "PASSED_EXECUTION_SUCCESS", "PASSED_EXECUTION_FAILED", "NOT_PASSED"];
@@ -30,7 +48,7 @@ export interface ApplyJob {
 }
 
 export function getApplyJobStateInfo(state: ApplyJobState) {
-    switch(state) {
+    switch (state) {
         case 'APPLYING':
             return '申请中';
         case 'CANCELLED':
@@ -49,7 +67,7 @@ export function getApplyJobStateInfo(state: ApplyJobState) {
 }
 
 export function getApplyJobTypeInfo(type: ApplyJobType) {
-    switch(type) {
+    switch (type) {
         case 'CREATE_WOODLAND':
             return '创建林地';
         case 'ADD_RECORD_IN_WOODLAND':

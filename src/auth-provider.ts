@@ -9,11 +9,11 @@ export const localStorageKey = "__auth_provider_token__";
 export const getToken = () => window.localStorage.getItem(localStorageKey);
 
 const handleUserResponse = (result: Result<User>) => {
-    if(result.code !== 101) {
+    if (result.code !== 101) {
         message.error(result.msg);
         return null;
     }
-    if(result.object.token) {
+    if (result.object.token) {
         window.localStorage.setItem(localStorageKey, result.object.token);
     }
     return result.object;

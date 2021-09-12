@@ -4,7 +4,7 @@ import {BrowserRouter as Router} from "react-router-dom";
 import {ReactQueryDevtools} from "react-query/devtools";
 import {AuthProvider} from "./auth-context";
 
-export const AppProviders = ({ children }: { children: ReactNode }) => {
+export const AppProviders = ({children}: { children: ReactNode }) => {
     const queryClient = new QueryClient();
 
     return (
@@ -12,7 +12,7 @@ export const AppProviders = ({ children }: { children: ReactNode }) => {
             <Router>
                 <AuthProvider>{children}</AuthProvider>
             </Router>
-            <ReactQueryDevtools initialIsOpen={false} />
+            <ReactQueryDevtools initialIsOpen={false}/>
         </QueryClientProvider>
     );
 };

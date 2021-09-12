@@ -12,7 +12,7 @@ export const useConfig = (
             queryClient.setQueryData(queryKey, (old?: any[]) => {
                 return callback(target, old);
             });
-            return { previousItems };
+            return {previousItems};
         },
         onError(error: any, newItem: any, context: any) {
             queryClient.setQueryData(queryKey, context.previousItems);
@@ -30,7 +30,7 @@ export const useEditConfig = (queryKey: QueryKey) =>
         queryKey,
         (target, old) =>
             old?.map((item) =>
-                item.id === target.id ? { ...item, ...target } : item
+                item.id === target.id ? {...item, ...target} : item
             ) || []
     );
 export const useAddConfig = (queryKey: QueryKey) =>

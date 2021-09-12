@@ -4,11 +4,11 @@ import {WoodlandInfo as WoodlandInfoComponent} from "../../../../component/woodl
 
 export const WoodlandInfo = () => {
 
-    const { id } = useParams();
+    const {id} = useParams();
 
     return (
         <>
-            {id?<WoodlandInfoComponent id={Number(id)} />:<></>}
+            {id ? <WoodlandInfoComponent id={Number(id)}/> : <></>}
         </>
     );
 }

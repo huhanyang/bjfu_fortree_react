@@ -3,12 +3,12 @@ import {UserInfo as UserInfoComponent} from "../../../../component/user/user-inf
 
 export const UserInfo = () => {
 
-    const { account } = useParams();
+    const {account} = useParams();
 
     return (
         <>
             {
-                account?<UserInfoComponent account={account} />:<>请重新选择用户</>
+                account ? <UserInfoComponent account={account}/> : <>请重新选择用户</>
             }
         </>
     );

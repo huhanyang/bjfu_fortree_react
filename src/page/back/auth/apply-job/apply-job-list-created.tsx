@@ -59,15 +59,15 @@ export const ApplyJobListCreated = () => {
                 loading={isApplyJobsLoading}
                 onChange={handleTableChange}
                 bordered
-                scroll={{ x: "100%" }}
+                scroll={{x: "100%"}}
             >
                 <Table.Column<ApplyJob>
                     title="类型"
                     key="type"
                     dataIndex="type"
-                    sorter={{ multiple: 1 }}
-                    filters={ApplyJobTypes.map(type=>{
-                        return { text: getApplyJobTypeInfo(type), value: type };
+                    sorter={{multiple: 1}}
+                    filters={ApplyJobTypes.map(type => {
+                        return {text: getApplyJobTypeInfo(type), value: type};
                     })}
                     render={(text, record) => getApplyJobTypeInfo(record.type)}
                 />
@@ -75,9 +75,9 @@ export const ApplyJobListCreated = () => {
                     title="状态"
                     key="state"
                     dataIndex="state"
-                    sorter={{ multiple: 2 }}
-                    filters={ApplyJobStates.map(state=>{
-                        return { text: getApplyJobStateInfo(state), value: state };
+                    sorter={{multiple: 2}}
+                    filters={ApplyJobStates.map(state => {
+                        return {text: getApplyJobStateInfo(state), value: state};
                     })}
                     render={(text, record) => getApplyJobStateInfo(record.state)}
                 />
@@ -85,20 +85,20 @@ export const ApplyJobListCreated = () => {
                     title="申请时间"
                     key="createdTime"
                     dataIndex="createdTime"
-                    sorter={{ multiple: 3 }}
+                    sorter={{multiple: 3}}
                     render={(text, record) => new Date(record.createdTime).toLocaleString()}
                 />
                 <Table.Column<ApplyJob>
                     title="操作人"
                     key="operateUser"
                     dataIndex="operateUser"
-                    render={(text, record) => <UserPopover user={record.operateUser} />}
+                    render={(text, record) => <UserPopover user={record.operateUser}/>}
                 />
                 <Table.Column<ApplyJob>
                     title="操作时间"
                     key="operateTime"
                     dataIndex="operateTime"
-                    sorter={{ multiple: 4 }}
+                    sorter={{multiple: 4}}
                     render={(text, record) => new Date(record.operateTime).toLocaleString()}
                 />
                 <Table.Column<ApplyJob>
@@ -109,13 +109,14 @@ export const ApplyJobListCreated = () => {
                         <Button
                             type="link"
                             loading={isCancelApplyJobLoading}
-                            disabled={record.state!=="APPLYING"}
+                            disabled={record.state !== "APPLYING"}
                             onClick={async () => {
                                 try {
                                     await cancelApplyJob(record.id);
                                 } catch (e) {
                                     message.error(e.message);
-                                }}}
+                                }
+                            }}
                         >撤销</Button>
                         <Link
                             to={generatePath("/back/apply-job/info/:id", {

@@ -31,8 +31,8 @@ export const useCreateWoodland = () => {
             client(`woodland/createWoodland`, {
                 method: "POST",
                 data: params
-            }).then((applyJob: ApplyJob)=>{
-                if(applyJob.state==="APPLYING") {
+            }).then((applyJob: ApplyJob) => {
+                if (applyJob.state === "APPLYING") {
                     message.success("申请成功, 等待审批！", 3);
                 }
             }),
@@ -67,8 +67,8 @@ export const useAddRecord = () => {
             client(`woodland/addRecord`, {
                 method: "POST",
                 data: params
-            }).then((applyJob: ApplyJob)=>{
-                if(applyJob.state==="APPLYING") {
+            }).then((applyJob: ApplyJob) => {
+                if (applyJob.state === "APPLYING") {
                     message.success("申请成功, 等待审批！", 3);
                 }
             }),
@@ -99,8 +99,8 @@ export const useAddTrees = () => {
             client(`woodland/addTrees`, {
                 method: "POST",
                 data: params
-            }).then((applyJob: ApplyJob)=>{
-                if(applyJob.state==="APPLYING") {
+            }).then((applyJob: ApplyJob) => {
+                if (applyJob.state === "APPLYING") {
                     message.success("申请成功, 等待审批！", 3);
                 }
             }),
@@ -124,7 +124,7 @@ export interface AddTreesByExcelRequestParams {
 export const useAddTreesByExcel = () => {
     const client = useHttp();
     return useMutation(
-        (params: AddTreesByExcelRequestParams) =>{
+        (params: AddTreesByExcelRequestParams) => {
             const formData = new FormData();
             formData.append("recordId", String(params.recordId));
             formData.append("fileName", String(params.file.name));
@@ -133,8 +133,8 @@ export const useAddTreesByExcel = () => {
                 method: "POST",
                 data: formData,
                 isFile: true
-            }).then((applyJob: ApplyJob)=>{
-                if(applyJob.state==="APPLYING") {
+            }).then((applyJob: ApplyJob) => {
+                if (applyJob.state === "APPLYING") {
                     message.success("申请成功, 等待审批！", 3);
                 }
             })
@@ -150,8 +150,8 @@ export const useDeleteWoodland = () => {
             client(`woodland/deleteWoodland`, {
                 method: "DELETE",
                 data: {id}
-            }).then((applyJob: ApplyJob)=>{
-                if(applyJob.state==="APPLYING") {
+            }).then((applyJob: ApplyJob) => {
+                if (applyJob.state === "APPLYING") {
                     message.success("申请成功, 等待审批！", 3);
                 }
             }),
@@ -166,8 +166,8 @@ export const useDeleteRecord = () => {
             client(`woodland/deleteRecord`, {
                 method: "DELETE",
                 data: {id}
-            }).then((applyJob: ApplyJob)=>{
-                if(applyJob.state==="APPLYING") {
+            }).then((applyJob: ApplyJob) => {
+                if (applyJob.state === "APPLYING") {
                     message.success("申请成功, 等待审批！", 3);
                 }
             }),
@@ -187,8 +187,8 @@ export const useDeleteTrees = () => {
             client(`woodland/deleteTrees`, {
                 method: "POST",
                 data: params
-            }).then((applyJob: ApplyJob)=>{
-                if(applyJob.state==="APPLYING") {
+            }).then((applyJob: ApplyJob) => {
+                if (applyJob.state === "APPLYING") {
                     message.success("申请成功, 等待审批！", 3);
                 }
             }),
@@ -217,8 +217,8 @@ export const useEditWoodland = () => {
             client(`woodland/editWoodland`, {
                 method: "POST",
                 data: params
-            }).then((applyJob: ApplyJob)=>{
-                if(applyJob.state==="APPLYING") {
+            }).then((applyJob: ApplyJob) => {
+                if (applyJob.state === "APPLYING") {
                     message.success("申请成功, 等待审批！", 3);
                 }
             }),
@@ -234,7 +234,8 @@ export interface EditRecordRequestParams {
     meanHeight: number;
     measureTime: string;
     addition?: string;
-    type: RecordType;measureType: string;
+    type: RecordType;
+    measureType: string;
     canopyDensity: number;
     dominantSpecies: string;
     ageGroup?: string
@@ -251,8 +252,8 @@ export const useEditRecord = () => {
             client(`woodland/editRecord`, {
                 method: "POST",
                 data: params
-            }).then((applyJob: ApplyJob)=>{
-                if(applyJob.state==="APPLYING") {
+            }).then((applyJob: ApplyJob) => {
+                if (applyJob.state === "APPLYING") {
                     message.success("申请成功, 等待审批！", 3);
                 }
             }),
@@ -290,11 +291,11 @@ export interface GetAllWoodlandsRequestParams {
     province?: string;
     city?: string;
     area?: number;
-    areaDirection?: "MIN"|"MAX";
+    areaDirection?: "MIN" | "MAX";
     treeCount?: number;
-    treeCountDirection?: "MIN"|"MAX";
+    treeCountDirection?: "MIN" | "MAX";
     treeMeanHeight?: number;
-    treeMeanHeightDirection?: "MIN"|"MAX";
+    treeMeanHeightDirection?: "MIN" | "MAX";
 }
 
 export const useAllWoodlandsByFilter = (params: GetAllWoodlandsRequestParams) => {
@@ -319,7 +320,7 @@ export const useWoodland = (id: number) => {
     return useQuery<Woodland>(
         ["woodland", id],
         () => client(`woodland/getWoodlandDetail`, {data: {id}}),
-    {enabled: Boolean(id)}
+        {enabled: Boolean(id)}
     );
 }
 

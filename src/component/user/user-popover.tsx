@@ -3,7 +3,7 @@ import {Popover} from "antd";
 import {Link} from "react-router-dom";
 import {generatePath} from "react-router";
 
-export const UserPopover = ({ user }: { user: User | undefined }) => {
+export const UserPopover = ({user}: { user: User | undefined }) => {
     return (
         <>
             {user ? (
@@ -11,9 +11,9 @@ export const UserPopover = ({ user }: { user: User | undefined }) => {
                     content={
                         <div>
                             姓名:{user.name}
-                            <br />
+                            <br/>
                             组织:{user.organization}
-                            <br />
+                            <br/>
                             账号:{user.account}
                         </div>
                     }

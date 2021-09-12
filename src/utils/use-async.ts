@@ -29,9 +29,9 @@ export const useAsync = <D>(
     initialState?: State<D>,
     initialConfig?: typeof defaultConfig
 ) => {
-    const config = { ...defaultConfig, ...initialConfig };
+    const config = {...defaultConfig, ...initialConfig};
     const [state, dispatch] = useReducer(
-        (state: State<D>, action: Partial<State<D>>) => ({ ...state, ...action }),
+        (state: State<D>, action: Partial<State<D>>) => ({...state, ...action}),
         {
             ...defaultInitialState,
             ...initialState,
@@ -40,7 +40,8 @@ export const useAsync = <D>(
     const safeDispatch = useSafeDispatch(dispatch);
     // useState直接传入函数的含义是：惰性初始化；所以，要用useState保存函数，不能直接传入函数
     // https://codesandbox.io/s/blissful-water-230u4?file=/src/App.js
-    const [retry, setRetry] = useState(() => () => {});
+    const [retry, setRetry] = useState(() => () => {
+    });
 
     const setData = useCallback(
         (data: D) =>
@@ -73,7 +74,7 @@ export const useAsync = <D>(
                     run(runConfig?.retry(), runConfig);
                 }
             });
-            safeDispatch({ stat: "loading" });
+            safeDispatch({stat: "loading"});
             return promise
                 .then((data) => {
                     setData(data);

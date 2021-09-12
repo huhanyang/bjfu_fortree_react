@@ -10,10 +10,10 @@ import {WoodlandInfo} from "../woodland-info";
 export const FrontMap = () => {
 
     const {data: woodlands} = useAllWoodlands();
-    const [popoverWoodlandState, setPopoverWoodlandState] = useState<Woodland|undefined>();
-    const popoverWoodland =useDebounce(popoverWoodlandState, 500);
+    const [popoverWoodlandState, setPopoverWoodlandState] = useState<Woodland | undefined>();
+    const popoverWoodland = useDebounce(popoverWoodlandState, 500);
     const [woodlandDetailVisible, setWoodlandDetailVisible] = useState(false);
-    const [woodlandDetailId, setWoodlandDetailId] = useState<number|undefined>();
+    const [woodlandDetailId, setWoodlandDetailId] = useState<number | undefined>();
 
     return (
         <>
@@ -24,25 +24,25 @@ export const FrontMap = () => {
                 title="林地地图"
                 subTitle="登录以获取更多功能"
             />
-            {woodlands?<Map
+            {woodlands ? <Map
                 center={new BMapGL.Point(116.40345879918985, 39.92396687340759)}
                 zoom={5}
                 enableDoubleClickZoom
                 enableScrollWheelZoom
                 enableDragging
-                onClick={()=>{
+                onClick={() => {
                     setPopoverWoodlandState(undefined);
                 }}
             >
                 {
                     // @ts-ignore
-                    <ScaleControl />
+                    <ScaleControl/>
                 }
                 {
                     // @ts-ignore
-                    woodlands.map(woodland=> <Marker
+                    woodlands.map(woodland => <Marker
                         position={new BMapGL.Point(woodland.position.longitude, woodland.position.latitude)}
-                        onClick={()=>{
+                        onClick={() => {
                             // 打开林地详情
                             setWoodlandDetailId(woodland.id);
                             setWoodlandDetailVisible(true);
@@ -54,7 +54,7 @@ export const FrontMap = () => {
                     />)
                 }
                 {
-                    popoverWoodland?
+                    popoverWoodland ?
                         // @ts-ignore
                         <InfoWindow
                             position={new BMapGL.Point(popoverWoodland.position.longitude, popoverWoodland.position.latitude)}
@@ -66,18 +66,22 @@ export const FrontMap = () => {
                                 ${getWoodlandShapeInfo(popoverWoodland.shape)} ${popoverWoodland.length}(M)x${popoverWoodland.width}(M)
                             `
                             }
-                            onClickclose={() => {setPopoverWoodlandState(undefined);}}
-                        />:<></>
+                            onClickclose={() => {
+                                setPopoverWoodlandState(undefined);
+                            }}
+                        /> : <></>
                 }
-            </Map>:<></>}
+            </Map> : <></>}
             <Drawer
                 title="林地详情"
                 placement="right"
                 width="70%"
-                onClose={()=>{setWoodlandDetailVisible(false);}}
+                onClose={() => {
+                    setWoodlandDetailVisible(false);
+                }}
                 visible={woodlandDetailVisible}
             >
-                {woodlandDetailId?<WoodlandInfo id={woodlandDetailId} />:<></>}
+                {woodlandDetailId ? <WoodlandInfo id={woodlandDetailId}/> : <></>}
             </Drawer>
         </>
     );

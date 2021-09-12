@@ -1,9 +1,18 @@
 import {User} from "./user";
 
-export type AuthorityType = "CREATE_ANY_WOODLAND"|"ADD_RECORD_IN_ANY_WOODLAND"|"ADD_TREES_IN_ANY_RECORD"|"DELETE_ANY_WOODLAND"|
-    "DELETE_RECORD_IN_ANY_WOODLAND"|"DELETE_TREES_IN_ANY_RECORD"|"EDIT_ANY_WOODLAND"|
-    "EDIT_RECORD_IN_ANY_WOODLAND"|"EXPORT_ANY_INFO";
-export const AuthorityTypes:AuthorityType[] = ["CREATE_ANY_WOODLAND", "ADD_RECORD_IN_ANY_WOODLAND", "ADD_TREES_IN_ANY_RECORD", "DELETE_ANY_WOODLAND",
+export type AuthorityType =
+    "CREATE_ANY_WOODLAND"
+    | "ADD_RECORD_IN_ANY_WOODLAND"
+    | "ADD_TREES_IN_ANY_RECORD"
+    | "DELETE_ANY_WOODLAND"
+    |
+    "DELETE_RECORD_IN_ANY_WOODLAND"
+    | "DELETE_TREES_IN_ANY_RECORD"
+    | "EDIT_ANY_WOODLAND"
+    |
+    "EDIT_RECORD_IN_ANY_WOODLAND"
+    | "EXPORT_ANY_INFO";
+export const AuthorityTypes: AuthorityType[] = ["CREATE_ANY_WOODLAND", "ADD_RECORD_IN_ANY_WOODLAND", "ADD_TREES_IN_ANY_RECORD", "DELETE_ANY_WOODLAND",
     "DELETE_RECORD_IN_ANY_WOODLAND", "DELETE_TREES_IN_ANY_RECORD", "EDIT_ANY_WOODLAND",
     "EDIT_RECORD_IN_ANY_WOODLAND", "EXPORT_ANY_INFO"];
 
@@ -16,7 +25,7 @@ export interface Authority {
 }
 
 export function getAuthorityTypeInfo(type: AuthorityType) {
-    switch(type) {
+    switch (type) {
         case 'CREATE_ANY_WOODLAND':
             return '创建林地无需审批';
         case 'ADD_RECORD_IN_ANY_WOODLAND':

@@ -45,10 +45,10 @@ export const WoodlandListCreated = () => {
         setRequestParams({
             ...requestParams,
             ...filters,
-            name:filters.name?String(filters.name[0]):"",
-            country:filters.country?String(filters.country[0]):"",
-            province:filters.province?String(filters.province[0]):"",
-            city:filters.city?String(filters.city[0]):"",
+            name: filters.name ? String(filters.name[0]) : "",
+            country: filters.country ? String(filters.country[0]) : "",
+            province: filters.province ? String(filters.province[0]) : "",
+            city: filters.city ? String(filters.city[0]) : "",
             pagination: pagination,
             sorter: newSorter,
         });
@@ -66,22 +66,22 @@ export const WoodlandListCreated = () => {
         confirm: (param?: FilterConfirmProps) => void;
         clearFilters?: () => void;
     }) => (
-        <div style={{ padding: 8 }}>
+        <div style={{padding: 8}}>
             <Input
                 value={selectedKeys[0]}
                 onChange={(e) =>
                     setSelectedKeys(e.target.value ? [e.target.value] : [])
                 }
                 onPressEnter={() => confirm()}
-                style={{ width: 188, marginBottom: 8, display: "block" }}
+                style={{width: 188, marginBottom: 8, display: "block"}}
             />
             <Space>
                 <Button
                     type="primary"
                     onClick={() => confirm()}
-                    icon={<SearchOutlined />}
+                    icon={<SearchOutlined/>}
                     size="small"
-                    style={{ width: 90 }}
+                    style={{width: 90}}
                 >
                     搜索
                 </Button>
@@ -92,7 +92,7 @@ export const WoodlandListCreated = () => {
                         }
                     }}
                     size="small"
-                    style={{ width: 90 }}
+                    style={{width: 90}}
                 >
                     重置
                 </Button>
@@ -110,16 +110,16 @@ export const WoodlandListCreated = () => {
                 loading={isWoodlandsLoading}
                 onChange={handleTableChange}
                 bordered
-                scroll={{ x: "100%" }}
+                scroll={{x: "100%"}}
             >
                 <Table.Column<Woodland>
                     title="林地名"
                     key="name"
                     dataIndex="name"
-                    sorter={{ multiple: 1 }}
+                    sorter={{multiple: 1}}
                     filterIcon={(filtered: boolean) => (
                         <SearchOutlined
-                            style={{ color: filtered ? "#1890ff" : undefined }}
+                            style={{color: filtered ? "#1890ff" : undefined}}
                         />
                     )}
                     filterDropdown={filterDropdown}
@@ -128,10 +128,10 @@ export const WoodlandListCreated = () => {
                     title="国家"
                     key="country"
                     dataIndex="country"
-                    sorter={{ multiple: 2 }}
+                    sorter={{multiple: 2}}
                     filterIcon={(filtered: boolean) => (
                         <SearchOutlined
-                            style={{ color: filtered ? "#1890ff" : undefined }}
+                            style={{color: filtered ? "#1890ff" : undefined}}
                         />
                     )}
                     filterDropdown={filterDropdown}
@@ -140,10 +140,10 @@ export const WoodlandListCreated = () => {
                     title="省份"
                     key="province"
                     dataIndex="province"
-                    sorter={{ multiple: 3 }}
+                    sorter={{multiple: 3}}
                     filterIcon={(filtered: boolean) => (
                         <SearchOutlined
-                            style={{ color: filtered ? "#1890ff" : undefined }}
+                            style={{color: filtered ? "#1890ff" : undefined}}
                         />
                     )}
                     filterDropdown={filterDropdown}
@@ -152,10 +152,10 @@ export const WoodlandListCreated = () => {
                     title="城市"
                     key="city"
                     dataIndex="city"
-                    sorter={{ multiple: 4 }}
+                    sorter={{multiple: 4}}
                     filterIcon={(filtered: boolean) => (
                         <SearchOutlined
-                            style={{ color: filtered ? "#1890ff" : undefined }}
+                            style={{color: filtered ? "#1890ff" : undefined}}
                         />
                     )}
                     filterDropdown={filterDropdown}
@@ -170,19 +170,19 @@ export const WoodlandListCreated = () => {
                     title="长度(M)"
                     key="length"
                     dataIndex="length"
-                    sorter={{ multiple: 5 }}
+                    sorter={{multiple: 5}}
                 />
                 <Table.Column<Woodland>
                     title="宽度(M)"
                     key="width"
                     dataIndex="width"
-                    sorter={{ multiple: 6 }}
+                    sorter={{multiple: 6}}
                 />
                 <Table.Column<Woodland>
                     title="创建时间"
                     key="createdTime"
                     dataIndex="createdTime"
-                    sorter={{ multiple: 7 }}
+                    sorter={{multiple: 7}}
                     render={(text, record) => new Date(record.createdTime).toLocaleString()}
                 />
                 <Table.Column<Woodland>

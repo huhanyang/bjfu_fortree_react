@@ -14,10 +14,10 @@ interface Config extends RequestInit {
 
 export const http = async (
     endpoint: string,
-    { data, token, headers, ...customConfig }: Config = {}
+    {data, token, headers, ...customConfig}: Config = {}
 ) => {
     // 兼容上传文件时不需要设置content-type 由fetch自动设置
-    const contentType = customConfig.isFile?{}:{
+    const contentType = customConfig.isFile ? {} : {
         "Content-Type": data ? "application/json" : ""
     } as {}
 
@@ -33,7 +33,7 @@ export const http = async (
         endpoint += `?${qs.stringify(data)}`;
     } else if (config.method.toUpperCase() === "DELETE") {
         endpoint += `?${qs.stringify(data)}`;
-    } else if(config.isFile) {
+    } else if (config.isFile) {
         // @ts-ignore
         config.body = data;
     } else {
@@ -45,14 +45,14 @@ export const http = async (
         .fetch(`${apiUrl}/${endpoint}`, config)
         .then(async (response) => {
             const data = await response.json();
-            if(data&&data.code&&response.ok) {
-                if(data.code === 202 || data.code === 303 || data.code === 304 || data.code === 305 || data.code === 502 || data.code === 307) {
+            if (data && data.code && response.ok) {
+                if (data.code === 202 || data.code === 303 || data.code === 304 || data.code === 305 || data.code === 502 || data.code === 307) {
                     // token出错
                     await auth.logout();
                     message.error(data.msg);
                     message.error("请重新登录");
                     window.location.reload();
-                    return Promise.reject({ message: "请重新登录" });
+                    return Promise.reject({message: "请重新登录"});
                 }
                 if (data.code === 101) {
                     return data.object;
@@ -70,11 +70,11 @@ export const http = async (
 // TS 中的typeof，是在静态环境运行的
 // return (...[endpoint, config]: Parameters<typeof http>) =>
 export const useHttp = () => {
-    const { user } = useAuth();
+    const {user} = useAuth();
     // utility type 的用法：用泛型给它传入一个其他类型，然后utility type对这个类型进行某种操作
     return useCallback(
         (...[endpoint, config]: Parameters<typeof http>) =>
-            http(endpoint, { ...config, token: user?.token }),
+            http(endpoint, {...config, token: user?.token}),
         [user?.token]
     );
 };

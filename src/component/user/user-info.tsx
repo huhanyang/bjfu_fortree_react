@@ -8,9 +8,9 @@ import {useState} from "react";
 import {getAuthorityTypeInfo} from "../../type/authority";
 import {WoodlandPopover} from "../woodland/woodland-popover";
 
-export const UserInfo = ({account}:{account: string}) => {
+export const UserInfo = ({account}: { account: string }) => {
 
-    const { user: me } = useAuth();
+    const {user: me} = useAuth();
     const {data: user, isLoading: isUserLoading} = useUserInfo(account);
     const {mutateAsync: changeUserState, isLoading: isChangeUserStateLoading} = useChangeUserState();
     const [authorityManageModalVisible, setAuthorityManageModalVisible] = useState(false);
@@ -18,19 +18,21 @@ export const UserInfo = ({account}:{account: string}) => {
     return (
         <>
             {isUserLoading ? (
-                <PageLoading />
+                <PageLoading/>
             ) : (
                 <Descriptions
                     bordered
                     title="个人信息"
-                    extra={me?.type==="ADMIN"&&user?<>
-                        <Button onClick={()=>{setAuthorityManageModalVisible(true);}}>管理权限</Button>
+                    extra={me?.type === "ADMIN" && user ? <>
+                        <Button onClick={() => {
+                            setAuthorityManageModalVisible(true);
+                        }}>管理权限</Button>
                         <Popconfirm
                             onConfirm={async () => {
                                 try {
                                     await changeUserState({
                                         account: account,
-                                        newState: user.state === "ACTIVE"?"BANNED":"ACTIVE"
+                                        newState: user.state === "ACTIVE" ? "BANNED" : "ACTIVE"
                                     });
                                 } catch (e) {
                                     message.error(e.message);
@@ -40,30 +42,33 @@ export const UserInfo = ({account}:{account: string}) => {
                             okText="确定"
                             cancelText="取消"
                         >
-                            <Button loading={isChangeUserStateLoading}>{user.state==="ACTIVE"?"封禁":"解封"}</Button>
+                            <Button loading={isChangeUserStateLoading}>{user.state === "ACTIVE" ? "封禁" : "解封"}</Button>
                         </Popconfirm>
-                    </>:<></>}
+                    </> : <></>}
                 >
                     <Descriptions.Item label="账号">{user?.account}</Descriptions.Item>
                     <Descriptions.Item label="姓名">{user?.account}</Descriptions.Item>
                     <Descriptions.Item label="组织">{user?.name}</Descriptions.Item>
                     <Descriptions.Item label="手机">{user?.phone}</Descriptions.Item>
                     <Descriptions.Item label="邮箱">{user?.email}</Descriptions.Item>
-                    <Descriptions.Item label="类型">{user?getUserTypeInfo(user.type):""}</Descriptions.Item>
-                    <Descriptions.Item label="状态">{user?getUserStateInfo(user.state):""}</Descriptions.Item>
-                    <Descriptions.Item label="注册时间">{user?new Date(user?.createdTime).toLocaleString():""}</Descriptions.Item>
-                    <Descriptions.Item span={2} label="权限">{user?.authorities?.map(authority=><>{getAuthorityTypeInfo(authority.type)}<br/></>)}</Descriptions.Item>
-                    <Descriptions.Item span={2} label="林地">{user?.woodlands?.map(woodland=><WoodlandPopover woodland={woodland} />)}</Descriptions.Item>
+                    <Descriptions.Item label="类型">{user ? getUserTypeInfo(user.type) : ""}</Descriptions.Item>
+                    <Descriptions.Item label="状态">{user ? getUserStateInfo(user.state) : ""}</Descriptions.Item>
+                    <Descriptions.Item
+                        label="注册时间">{user ? new Date(user?.createdTime).toLocaleString() : ""}</Descriptions.Item>
+                    <Descriptions.Item span={2}
+                                       label="权限">{user?.authorities?.map(authority => <>{getAuthorityTypeInfo(authority.type)}<br/></>)}</Descriptions.Item>
+                    <Descriptions.Item span={2} label="林地">{user?.woodlands?.map(woodland => <WoodlandPopover
+                        woodland={woodland}/>)}</Descriptions.Item>
                 </Descriptions>
             )}
             {
-                me?.type==="ADMIN"&&user?<>
+                me?.type === "ADMIN" && user ? <>
                     <UserAuthoritiesManageModal
                         account={account}
                         visible={authorityManageModalVisible}
                         setVisible={setAuthorityManageModalVisible}
                     />
-                </>:<></>
+                </> : <></>
             }
         </>
     );

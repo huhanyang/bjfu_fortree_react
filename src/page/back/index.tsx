@@ -8,6 +8,6 @@ import {AuthenticatedApp} from "./auth";
  * @constructor
  */
 export const BackPage = () => {
-    const { user } = useAuth();
-    return <>{user ? <AuthenticatedApp /> : <UnAuthenticatedApp />}</>;
+    const {user} = useAuth();
+    return <>{user ? <AuthenticatedApp/> : <UnAuthenticatedApp/>}</>;
 };
