@@ -117,14 +117,19 @@ export const WoodlandMap = () => {
                     setPopoverWoodlandState(undefined);
                 }}
             >
-                <ScaleControl/>
-                {isDrawing ? <DrawingManager
+                {true?
+                    // @ts-ignore
+                    <ScaleControl/>:<></>}
+                {isDrawing ?
+                    // @ts-ignore
+                    <DrawingManager
                     enableGpc
                     drawingToolOptions={{drawingModes: ["polygon"]}}
                     onOverlaycomplete={(e, info) => {
                         try {
                             exportWoodlands({
                                 polygon: {
+                                    // @ts-ignore
                                     g2dPointList: (info.overlay.points.map(point => {
                                         if (point.latLng) {
                                             return {
@@ -133,7 +138,9 @@ export const WoodlandMap = () => {
                                             }
                                         } else {
                                             return {
+                                                // @ts-ignore
                                                 longitude: info.overlay.points[0].latLng.lng,
+                                                // @ts-ignore
                                                 latitude: info.overlay.points[0].latLng.lat
                                             };
                                         }

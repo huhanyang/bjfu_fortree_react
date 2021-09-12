@@ -170,6 +170,7 @@ export const WoodlandInfo = ({id}: { id: number }) => {
                             {
                                 // @ts-ignore
                                 woodland.records.map((record) => <Select.Option
+                                    // @ts-ignore
                                     value={woodland.records.indexOf(record)}>
                                     {new Date(record.measureTime).toLocaleString()}
                                 </Select.Option>)
