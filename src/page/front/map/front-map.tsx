@@ -5,6 +5,7 @@ import {useDebounce} from "../../../utils";
 import {InfoWindow, Map, Marker, ScaleControl} from "react-bmapgl";
 import {Drawer, PageHeader} from "antd";
 import {WoodlandInfo} from "../woodland-info";
+import {useAuth} from "../../../context/auth-context";
 
 
 export const FrontMap = () => {
@@ -14,6 +15,7 @@ export const FrontMap = () => {
     const popoverWoodland = useDebounce(popoverWoodlandState, 500);
     const [woodlandDetailVisible, setWoodlandDetailVisible] = useState(false);
     const [woodlandDetailId, setWoodlandDetailId] = useState<number | undefined>();
+    const {user, logout} = useAuth();
 
     return (
         <>
@@ -22,7 +24,7 @@ export const FrontMap = () => {
                     border: "1px solid rgb(235, 237, 240)"
                 }}
                 title="林地地图"
-                subTitle="登录以获取更多功能"
+                subTitle={user?"进入后台以获取更多功能":"登录以获取更多功能"}
             />
             {woodlands ? <Map
                 center={new BMapGL.Point(116.40345879918985, 39.92396687340759)}

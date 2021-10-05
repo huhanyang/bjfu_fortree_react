@@ -6,7 +6,7 @@ import {useDebounce} from "../../../../utils";
 import {WoodlandInfoDrawer} from "../../../../component/woodland/woodland-info-drawer";
 import {Button, Dropdown, Form, Input, message, Select} from "antd";
 import {useExportWoodlandsInBounds} from "../../../../utils/export";
-import {useNavigate} from "react-router";
+import {generatePath, useNavigate} from "react-router";
 
 
 export const WoodlandMap = () => {
@@ -21,13 +21,15 @@ export const WoodlandMap = () => {
     const [isDrawing, setIsDrawing] = useState<boolean>(false);
     const {mutateAsync: exportWoodlands} = useExportWoodlandsInBounds();
     const navigate = useNavigate();
+    const [form] = Form.useForm();
+
 
     const onFinish = (params: GetAllWoodlandsRequestParams) => {
-        console.log(params);
         setRequest(params);
     }
 
     const FilterForm = () => <Form
+        form={form}
         initialValues={{
             areaDirection: "MIN",
             treeCountDirection: "MIN",
@@ -92,6 +94,12 @@ export const WoodlandMap = () => {
             <Button loading={isLoading} htmlType={"submit"} type={"primary"}>
                 查询
             </Button>
+            <Button style={{float: "right"}} loading={isLoading} htmlType={"submit"} onClick={()=>{
+                setRequest({});
+                form.resetFields();
+            }}>
+                重置
+            </Button>
         </Form.Item>
     </Form>
 
@@ -146,8 +154,14 @@ export const WoodlandMap = () => {
                                         }
                                     }))
                                 }
-                            }).then(() => {
-                                navigate("/back/apply-job/list-created", {replace: true});
+                            }).then((applyJob)=> message.success("申请已经创建，正在跳转到申请单页面！").then(()=>applyJob)
+                            ).then((applyJob) => {
+                                if(applyJob?.id) {
+                                    navigate(generatePath("/back/apply-job/info/:id", {id: applyJob.id}),
+                                        {replace: true});
+                                } else {
+                                    navigate("/back/apply-job/list-created", {replace: true});
+                                }
                             });
                         } catch (e) {
                             message.error(e.message);

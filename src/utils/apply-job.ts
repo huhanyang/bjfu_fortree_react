@@ -66,9 +66,8 @@ export const useCancelApplyJob = () => {
     const client = useHttp();
     return useMutation(
         (id: number) =>
-            client(`applyJob/cancelApplyJob`, {
-                method: "POST",
-                data: {id}
+            client(`applyJob/cancelApplyJob?id=`+id, {
+                method: "POST"
             }),
         useNoOpsConfig(["apply-job"])
     );

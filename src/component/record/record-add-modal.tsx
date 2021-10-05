@@ -82,7 +82,7 @@ export const RecordAddModal = ({
                         {required: true, message: '请输入测量时间!'}
                     ]}
                 >
-                    <DatePicker/>
+                    <DatePicker showTime/>
                 </Form.Item>
                 <Form.Item
                     name="isTreeWithId"
